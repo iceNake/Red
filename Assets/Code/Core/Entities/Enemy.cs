@@ -67,9 +67,9 @@ public class Enemy : Entity
         if (_currentState == newState) return;
 
         Debug.Log($"{name} {_currentState} {newState}");
-
+        
         _currentState = newState;
-
+        
         /*if (_currentState == State.Chasing)
         {
             EnemyColliders.instance.EnterCombat(this);
