@@ -1542,6 +1542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppSceneManager
   dontDestroyOnLoad: 1
+  MenuInicial: InitialMenu
+  GameScene: Game
 --- !u!1 &1599049666
 GameObject:
   m_ObjectHideFlags: 0

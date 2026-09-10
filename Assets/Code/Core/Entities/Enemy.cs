@@ -99,6 +99,7 @@ public class Enemy : Entity
     public override void TakeKnockback(Vector2 knockbackDirection, float knockbackForce)
     {
         base.TakeKnockback(knockbackDirection, knockbackForce);
+        
     }
 
     public void SetCollisionLayer(bool hasCollision)

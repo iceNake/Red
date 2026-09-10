@@ -90,7 +90,7 @@ public class Entity : MonoBehaviour, IDamageable
         _rb.linearVelocity = Vector2.zero;
         _rb.AddForce(directionForKnockback * knockbackForce, ForceMode2D.Impulse);
 
-        Debug.Log("Hey! You knocked the air out of me (Got knockback)");
+        Debug.Log("<color=blue> Hey! You knocked the air out of me (Got knockback) </color>");
     }
 
     public virtual void Die()

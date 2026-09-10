@@ -26,6 +26,7 @@ public class HitBox : MonoBehaviour
 
         damageable.TakeDamage(_attackSystem.damage);
         damageable.TakeKnockback(_attackSystem.dirKnocBack, _attackSystem.forceKnockback);
+        Debug.Log(_attackSystem.dirKnocBack + "     " + _attackSystem.forceKnockback +  "AAAAAAAAAAAAAAAAA");
         hitBool = true;
 
         if (hitBool)
