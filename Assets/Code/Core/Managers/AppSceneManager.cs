@@ -6,8 +6,8 @@ using RED.Utility.Singleton;
 
 public class AppSceneManager : Singleton<AppSceneManager>
 {
-    public const string INITIAL_MENU_SCENE_NAME = "InitialMenu";
-    public const string GAME_SCENE_NAME = "Game";
+    public string MenuInicial = "InitialMenu";
+    public string GameScene = "Game";
     
     protected override void Awake()
     {

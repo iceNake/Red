@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager>
     {
         LoadingScreenManager.Instance.ShowLoadingScreen();
         
-        AppSceneManager.Instance.LoadSceneAsync(AppSceneManager.GAME_SCENE_NAME, () => 
+        AppSceneManager.Instance.LoadSceneAsync(AppSceneManager.Instance.GameScene, () => 
         {
             ChangeState(GameState.Generating);
         });

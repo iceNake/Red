@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Project/Scenes/Test/Gameplay_Testing.unity
     guid: 4232338fcecb43b4ab6434bfff053d8e
+  - enabled: 1
+    path: Assets/Project/Scenes/Test/TestBarrera/InitialMenuTest.unity
+    guid: 1df6b0da75b36cf4d9d959893cf364ee
+  - enabled: 1
+    path: Assets/Project/Scenes/Test/TestBarrera/GameTest.unity
+    guid: 402e2e270cfc3a647ac23a73715f3f3e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

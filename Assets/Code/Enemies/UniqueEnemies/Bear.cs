@@ -36,9 +36,9 @@ public class Bear : Bulky
     {
         if (Vector2.Distance(transform.position, _playerRef.transform.position) < _detectionRange)
         {
-            ChangeState(State.Chasing);
             _animator.SetBool("Chasing", true);
-            Debug.Log("Chasing Activado");
+            ChangeState(State.Chasing);
+            Debug.Log("<color=red> Bear Chasing</color>");
             _animator.SetBool("Attacking", false);
         }
 

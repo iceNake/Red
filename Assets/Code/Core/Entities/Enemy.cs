@@ -67,18 +67,19 @@ public class Enemy : Entity
         if (_currentState == newState) return;
 
         Debug.Log($"{name} {_currentState} {newState}");
-
+        
         _currentState = newState;
-
-        if (_currentState == State.Chasing)
+        
+        switch( _currentState )
         {
-            EnemyColliders.instance.EnterCombat(this);
-
+            case State.Chasing:
+                EnemyColliders.instance?.EnterCombat( this );
+                break;
+            case State.Dead:
+                EnemyColliders.instance?.ExitCombat( this ); 
+                break;
         }
-        else if (_currentState == State.Dead)
-        {
-            EnemyColliders.instance.ExitCombat(this);
-        }
+       
     }
 
     protected void FlipTowardsPlayer()
