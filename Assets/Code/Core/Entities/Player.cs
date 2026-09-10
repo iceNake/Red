@@ -40,6 +40,10 @@ public class Player : Entity
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [Header("Attack SO")]
+    public AttackSO attackLight;
+    public AttackSO attackLight1;
+    
     private Animator _animator;
 
     private void OnEnable()

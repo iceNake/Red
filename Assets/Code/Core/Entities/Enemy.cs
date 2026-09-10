@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public enum State { Idle, Chasing, Attacking, Dead }
 public class Enemy : Entity
@@ -7,6 +8,7 @@ public class Enemy : Entity
     [SerializeField] protected State _currentState = State.Idle;
 
     protected Player _playerRef;
+    public bool isStunned = false;
 
 
     [Header("Detection Settings")]
@@ -28,10 +30,18 @@ public class Enemy : Entity
         _playerRef = FindFirstObjectByType<Player>(); 
         if (_playerRef == null) Debug.LogWarning($"Enemy " + gameObject.name + " no encontro a player");
     }
+    
+    private void OnDisable()
+    {
+        if(EnemyColliders.instance != null)
+        {
+            EnemyColliders.instance.ExitCombat(this);
+        }
+    }
 
     protected virtual void Update()
     {
-        if (!IsAlive || _playerRef == null) return;
+        if (!IsAlive || _playerRef == null || isStunned) return;
         
         switch (_currentState)
         {
@@ -86,9 +96,17 @@ public class Enemy : Entity
     {
         float direction = _playerRef.transform.position.x - transform.position.x;
         if (direction > 0.1f)
+        {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            _playerRef.attackLight.direction = new Vector2(-1, 1);
+            _playerRef.attackLight1.direction = new Vector2(-1, 1);
+        }
         else if (direction < -0.1f)
+        {
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            _playerRef.attackLight.direction = new Vector2(1, 1);
+            _playerRef.attackLight1.direction = new Vector2(1, 1);
+        }
     }
 
     public override void TakeDamage(float damage)
@@ -98,7 +116,9 @@ public class Enemy : Entity
 
     public override void TakeKnockback(Vector2 knockbackDirection, float knockbackForce)
     {
+        isStunned = true;
         base.TakeKnockback(knockbackDirection, knockbackForce);
+        StartCoroutine(KnockbackStunRoutine(1f));
     }
 
     public void SetCollisionLayer(bool hasCollision)
@@ -114,12 +134,10 @@ public class Enemy : Entity
 
     }
 
-    private void OnDisable()
+    private IEnumerator KnockbackStunRoutine(float duration)
     {
-        if(EnemyColliders.instance != null)
-        {
-            EnemyColliders.instance.ExitCombat(this);
-        }
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
+        _rb.linearVelocity = Vector2.zero;
     }
-
 }

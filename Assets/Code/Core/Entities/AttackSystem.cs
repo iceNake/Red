@@ -159,7 +159,7 @@ public class AttackSystem : MonoBehaviour
         dirKnocBack = attackSO.direction;
         forceKnockback = attackSO.forceKnockback;
 
-        Debug.Log("Daño es de " + damage);
+        Debug.Log("Daï¿½o es de " + damage);
 
         yield return new WaitForSeconds(attackSO.durationAttack);
 

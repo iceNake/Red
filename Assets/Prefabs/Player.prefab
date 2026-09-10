@@ -408,8 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3b56aa569034f4f875cd7372868e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _currentHealth: 200
-  _maxHealth: 200
+  _currentHealth: 1000
+  _maxHealth: 1000
   _currentSpeed: 8
   _maxSpeed: 10
   _currentDamage: 0
@@ -434,6 +434,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   spriteRenderer: {fileID: 7104531270331787909}
+  attackLight: {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
+  attackLight1: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
 --- !u!70 &3026535042534623568
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
