@@ -16,7 +16,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   startup: 2
   endlag: 2
-  forceKnockback: 10
+  forceKnockback: 1000
   rangeAttack: {x: 5, y: 5}
   durationAttack: 2
   comboWindow: 2

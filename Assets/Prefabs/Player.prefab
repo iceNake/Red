@@ -491,7 +491,7 @@ MonoBehaviour:
   comboIndex: 0
   damage: 10
   dirKnocBack: {x: 10, y: 10}
-  forceKnockback: 1000000
+  forceKnockback: 1000
 --- !u!114 &8573041673517633212
 MonoBehaviour:
   m_ObjectHideFlags: 0
