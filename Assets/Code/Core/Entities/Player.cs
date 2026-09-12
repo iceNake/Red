@@ -88,6 +88,8 @@ public class Player : Entity
         InputRead();
         UpdateAnimatorParameters();
         Flip();
+        
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) GameManager.Instance.TogglePause();
     }
 
     private void FixedUpdate()
