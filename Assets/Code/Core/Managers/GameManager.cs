@@ -63,6 +63,7 @@ public class GameManager : Singleton<GameManager>
     private void HandlePlayerDeath()
     {
         ChangeState(GameState.GameOver);
+        GameUIManager.Instance.ShowGameOver();
     }
     
     public void TogglePause()
