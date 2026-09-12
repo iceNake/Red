@@ -38,9 +38,6 @@ public class GameManager : Singleton<GameManager>
             case GameState.Generating:
                 GameEvents.OnRequestLevelGeneration?.Invoke();
                 break;
-            case GameState.Playing:
-                GameEvents.OnPlayerSpawn?.Invoke();
-                break;
         }
     }
 
@@ -57,23 +54,37 @@ public class GameManager : Singleton<GameManager>
     private void HandleLevelGenerated()
     {
         ChangeState(GameState.Playing);
+        GameEvents.OnPlayerSpawn?.Invoke();
         LoadingScreenManager.Instance.HideLoadingScreen();
     }
 
     private void HandlePlayerDeath()
     {
         ChangeState(GameState.GameOver);
+        GameUIManager.Instance.ShowGameOver();
     }
     
     public void TogglePause()
     {
         if (CurrentState == GameState.Playing)
         {
+            GameUIManager.Instance.ShowPause();
             ChangeState(GameState.Paused);
         }
         else if (CurrentState == GameState.Paused)
         {
+            GameUIManager.Instance.DisableAllCanvases();
             ChangeState(GameState.Playing);
         }
+    }
+
+    public void ReturnToMenu()
+    {
+        LoadingScreenManager.Instance.ShowLoadingScreen();
+        AppSceneManager.Instance.LoadSceneAsync(AppSceneManager.Instance.MenuInicial, () => 
+        {
+            ChangeState(GameState.Menu);
+            LoadingScreenManager.Instance.HideLoadingScreen();
+        });
     }
 }
