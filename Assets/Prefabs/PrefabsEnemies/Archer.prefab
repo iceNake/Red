@@ -317,6 +317,7 @@ MonoBehaviour:
   firePoint: {fileID: 2279019047626359853}
   leftKnockBack: {x: -1, y: 0.5}
   rightKnockBack: {x: 1, y: 0.5}
+  _spriteRenderer: {fileID: 9063406581338627695}
 --- !u!1 &8195837165201841142
 GameObject:
   m_ObjectHideFlags: 0

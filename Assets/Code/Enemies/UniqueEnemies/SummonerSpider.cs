@@ -19,6 +19,9 @@ public class SummonerSpider : Summoner
     public GameObject invocations;
 
     private float _lastAttackTime;
+    
+    [Header("Sprite")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
     [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
@@ -131,5 +134,12 @@ public class SummonerSpider : Summoner
         if (_summonerData == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _summonerData.attackInvoke);
+    }
+    
+    IEnumerator SpriteRed()
+    {
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _spriteRenderer.color = Color.white;
     }
 }

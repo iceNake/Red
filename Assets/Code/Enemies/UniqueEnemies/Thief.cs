@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,9 @@ public class Thief : GlassCannon
     private float _lastAttackTime;
     [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
     [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
+    
+    [Header("Sprite")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     protected override void Awake()
     {
@@ -109,9 +113,13 @@ public class Thief : GlassCannon
             proj.Init(direction, CurrentDamage);
         }
     }
-
-    private void RangeEscape()
+    
+    
+    IEnumerator SpriteRed()
     {
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _spriteRenderer.color = Color.white;
     }
     
     

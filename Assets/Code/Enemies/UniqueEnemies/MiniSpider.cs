@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,9 @@ public class MiniSpider : Squishy
     [SerializeField] private Animator _animator;
 
     private float _lastAttackTime;
+    
+    [Header("Sprite")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     
     [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
     [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
@@ -112,5 +116,12 @@ public class MiniSpider : Squishy
         if (_squishyData == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _squishyData.attackRange);
+    }
+    
+    IEnumerator SpriteRed()
+    {
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _spriteRenderer.color = Color.white;
     }
 }

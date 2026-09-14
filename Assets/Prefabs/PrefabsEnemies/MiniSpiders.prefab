@@ -167,6 +167,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _animator: {fileID: 2471514333125469613}
+  _spriteRenderer: {fileID: 8173152741701836319}
   leftKnockBack: {x: -1, y: 1}
   rightKnockBack: {x: 1, y: 1}
 --- !u!1 &1473723461976731392
