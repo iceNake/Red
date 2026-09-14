@@ -13,12 +13,17 @@ public class MiniSpider : Squishy
     [SerializeField] private Animator _animator;
 
     private float _lastAttackTime;
+    
+    [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
+    [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
 
     protected override void Awake()
     {
         _animator = GetComponent<Animator>();
         base.Awake();
         InitializeStats();
+        leftKnockBackDirection = leftKnockBack;
+        rightKnockBackDirection = rightKnockBack;
     }
 
     private void InitializeStats()

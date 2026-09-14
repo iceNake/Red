@@ -26,12 +26,6 @@ public class HitBox : MonoBehaviour
 
         damageable.TakeDamage(_attackSystem.damage);
         damageable.TakeKnockback(_attackSystem.dirKnocBack, _attackSystem.forceKnockback);
-        hitBool = true;
-
-        if (hitBool)
-        {
-            GameEvents.OnPlayerHit?.Invoke();
-            hitBool = false;
-        }
+        GameEvents.OnPlayerHit?.Invoke();
     }
 }

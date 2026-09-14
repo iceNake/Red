@@ -11,11 +11,15 @@ public class Thief : GlassCannon
     public GameObject projectilePrefab;
     public Transform firePoint;
     private float _lastAttackTime;
+    [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
+    [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
 
     protected override void Awake()
     {
         base.Awake();
         InitializeStats();
+        leftKnockBackDirection = leftKnockBack;
+        rightKnockBackDirection = rightKnockBack;
     }
     //Pasamos las variables del scriptableobject para el enemigo
     private void InitializeStats()
@@ -55,7 +59,7 @@ public class Thief : GlassCannon
             ChangeState(State.Chasing);
         }
     }
-    //Aqui recibimos daño
+    //Aqui recibimos daï¿½o
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
@@ -67,13 +71,14 @@ public class Thief : GlassCannon
         float direction = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
         _rb.linearVelocity = new Vector2(direction * CurrentSpeed, _rb.linearVelocity.y);
     }
-    //Aqui estamos usando un overlapCircleAll que funciona como un raycast de circulo asi que si esta dentro del circulo el enemigo va a ahcer daño
+    //Aqui estamos usando un overlapCircleAll que funciona como un raycast de circulo asi que si esta dentro del circulo el enemigo va a ahcer daï¿½o
     private void PerformAoEAttack()
     {
         _lastAttackTime = Time.time;
         OnRangeAttack?.Invoke();
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _glassCannonData.attackRange, _glassCannonData.playerLayer);
+        
         foreach (var col in hitColliders)
         {
 
@@ -104,4 +109,10 @@ public class Thief : GlassCannon
             proj.Init(direction, CurrentDamage);
         }
     }
+
+    private void RangeEscape()
+    {
+    }
+    
+    
 }

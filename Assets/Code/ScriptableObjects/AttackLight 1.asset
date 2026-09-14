@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackSO
   damage: 10
   direction: {x: 1, y: 1}
-  startup: 2
-  endlag: 2
+  startup: 0.5
+  endlag: 0.5
   forceKnockback: 100
   rangeAttack: {x: 5, y: 5}
-  durationAttack: 2
+  durationAttack: 0.5
   comboWindow: 2

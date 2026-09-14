@@ -155,8 +155,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8770116662669937994}
   - component: {fileID: 4379952382987393473}
-  - component: {fileID: 6143587116808955729}
-  m_Layer: 0
+  - component: {fileID: 2730579212471016990}
+  m_Layer: 10
   m_Name: HitboxWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6143587116808955729
+--- !u!114 &2730579212471016990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -408,8 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3b56aa569034f4f875cd7372868e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _currentHealth: 10
-  _maxHealth: 10
+  _currentHealth: 10000
+  _maxHealth: 10000
   _currentSpeed: 8
   _maxSpeed: 10
   _currentDamage: 0

@@ -150,9 +150,10 @@ public class AttackSystem : MonoBehaviour
     {
         isAttacking = true;
 
-        yield return new WaitForSeconds(attackSO.startup);
+        yield return new WaitForFixedUpdate();
         HitBox hitbox = hitBoxWeapon.GetComponent<HitBox>();
         hitbox.Init(this, gameObject);
+        hitBoxWeapon.gameObject.SetActive(false);
         hitBoxWeapon.size = attackSO.rangeAttack;
         hitBoxWeapon.gameObject.SetActive(true);
         damage = attackSO.damage;
@@ -167,7 +168,7 @@ public class AttackSystem : MonoBehaviour
 
         OpenComboWindow(attackSO);
 
-        yield return new WaitForSeconds(attackSO.endlag);
+        yield return new WaitForFixedUpdate();
 
         isAttacking = false;
         _attackCoroutine = null;
