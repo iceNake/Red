@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7340830000783947857}
   - component: {fileID: 1494617702838547359}
   - component: {fileID: 6852427881966816792}
-  - component: {fileID: 2471514333125469613}
   - component: {fileID: 1566991919429969228}
   m_Layer: 10
   m_Name: MiniSpiders
@@ -110,28 +109,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.6, y: 1.79}
   m_EdgeRadius: 0
---- !u!95 &2471514333125469613
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023014697444916596}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e83d42a3249156b4aa46ca7afb7b14cf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1566991919429969228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +143,6 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  _animator: {fileID: 2471514333125469613}
   _spriteRenderer: {fileID: 8173152741701836319}
   leftKnockBack: {x: -1, y: 1}
   rightKnockBack: {x: 1, y: 1}
@@ -252,7 +228,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

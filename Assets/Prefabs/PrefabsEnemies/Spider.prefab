@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 185231409395346771}
   - component: {fileID: 6525631704262275135}
   - component: {fileID: 6990599560429505413}
-  - component: {fileID: 708192312069557674}
   - component: {fileID: 8828732695691539763}
   m_Layer: 10
   m_Name: Spider
@@ -111,28 +110,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.22, y: 3.14}
   m_EdgeRadius: 0
---- !u!95 &708192312069557674
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68561327486231281}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e83d42a3249156b4aa46ca7afb7b14cf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8828732695691539763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +144,7 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  _animator: {fileID: 708192312069557674}
+  _animator: {fileID: 0}
   canStun: 0
   pointInvocations: {fileID: 4075060207084078955}
   invocations: {fileID: 1023014697444916596, guid: 961e3bacf2f45f94d8870dcde2022411, type: 3}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine.Events;
 
 public class SummonerSpider : Summoner
@@ -10,8 +11,8 @@ public class SummonerSpider : Summoner
     public UnityEvent OnInvokeAttack;
     public UnityEvent OnTakeDamage;
 
-    [Header("Referencias")]
-    [SerializeField] private Animator _animator;
+    //[Header("Referencias")]
+    //[SerializeField] private Animator _animator;
 
     [Header("Invocaciones")]
     public bool canStun;
@@ -28,7 +29,7 @@ public class SummonerSpider : Summoner
     protected override void Awake()
     {
         canStun = true;
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
         base.Awake();
         InitializeStats();
         leftKnockBackDirection = leftKnockBack;
@@ -50,8 +51,8 @@ public class SummonerSpider : Summoner
         if (Vector2.Distance(transform.position, _playerRef.transform.position) < _detectionRange)
         {
             ChangeState(State.Chasing);
-            _animator.SetBool("Chasing", true);
-            _animator.SetBool("Attacking", false);
+            //_animator.SetBool("Chasing", true);
+            //_animator.SetBool("Attacking", false);
         }
 
     }
@@ -64,8 +65,8 @@ public class SummonerSpider : Summoner
         if (distanceToPlayer <= _summonerData.attackInvoke * 0.8f)
         {
             ChangeState(State.Attacking);
-            _animator.SetBool("Attacking", true);
-            _animator.SetBool("Chasing", false);
+            //_animator.SetBool("Attacking", true);
+            //_animator.SetBool("Chasing", false);
         }
 
 
@@ -81,8 +82,8 @@ public class SummonerSpider : Summoner
         {
             PerformAoEAttack();
             ChangeState(State.Chasing);
-            _animator.SetBool("Chasing", true);
-            _animator.SetBool("Attacking", false);
+            //_animator.SetBool("Chasing", true);
+            //_animator.SetBool("Attacking", false);
 
         }
     }
@@ -125,6 +126,7 @@ public class SummonerSpider : Summoner
 
     public override void TakeDamage(float damage)
     {
+        StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
         OnTakeDamage?.Invoke();
     }

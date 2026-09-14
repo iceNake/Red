@@ -10,8 +10,8 @@ public class MiniSpider : Squishy
     public UnityEvent OnExplosionAttack;
     public UnityEvent OnTakeDamage;
 
-    [Header("Referencias")]
-    [SerializeField] private Animator _animator;
+    //[Header("Referencias")]
+    //[SerializeField] private Animator _animator;
 
     private float _lastAttackTime;
     
@@ -23,7 +23,7 @@ public class MiniSpider : Squishy
 
     protected override void Awake()
     {
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
         base.Awake();
         InitializeStats();
         leftKnockBackDirection = leftKnockBack;
@@ -46,8 +46,8 @@ public class MiniSpider : Squishy
         if (Vector2.Distance(transform.position, _playerRef.transform.position) < _detectionRange)
         {
             ChangeState(State.Chasing);
-            _animator.SetBool("Chasing", true);
-            _animator.SetBool("Attacking", false);
+            //_animator.SetBool("Chasing", true);
+            //_animator.SetBool("Attacking", false);
         }
 
     }
@@ -60,8 +60,8 @@ public class MiniSpider : Squishy
         if (distanceToPlayer <= _squishyData.attackRange * 0.8f)
         {
             ChangeState(State.Attacking);
-            _animator.SetBool("Attacking", true);
-            _animator.SetBool("Chasing", false);
+            //_animator.SetBool("Attacking", true);
+            //_animator.SetBool("Chasing", false);
         }
 
 
@@ -77,8 +77,8 @@ public class MiniSpider : Squishy
         {
             PerformAoEAttack();
             ChangeState(State.Chasing);
-            _animator.SetBool("Chasing", true);
-            _animator.SetBool("Attacking", false);
+            //_animator.SetBool("Chasing", true);
+            //_animator.SetBool("Attacking", false);
 
         }
     }
@@ -107,6 +107,7 @@ public class MiniSpider : Squishy
 
     public override void TakeDamage(float damage)
     {
+        StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
         OnTakeDamage?.Invoke();
     }

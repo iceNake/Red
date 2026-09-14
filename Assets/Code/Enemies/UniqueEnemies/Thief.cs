@@ -66,6 +66,7 @@ public class Thief : GlassCannon
     //Aqui recibimos da�o
     public override void TakeDamage(float damage)
     {
+        StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
         OnTakeDamage?.Invoke();
     }
