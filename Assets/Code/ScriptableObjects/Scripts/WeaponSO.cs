@@ -9,12 +9,10 @@ public class WeaponSO : ScriptableObject
     public AttackSO[] GroundedNeutralAttackSos;
     public AttackSO GroundedUpAttackSos;
     public AttackSO GroundedDownAttackSos;
-    public AttackSO GroundedRightAttackSos;
-    public AttackSO GroundedLeftAttackSos;
+    public AttackSO GroundedSideAttackSos;
     [Header("AirAttacks")]
     public AttackSO AirNeutralAttackSos;
     public AttackSO AirUpAttackSOs;
     public AttackSO AirDownAttackSos;
-    public AttackSO AirRightAttackSos;
-    public AttackSO AirLeftAttackSos;
+    public AttackSO AirSideAttackSos;
 }

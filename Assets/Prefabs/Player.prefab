@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 1842627914115349565}
   - component: {fileID: 6889764266415936073}
   - component: {fileID: 7104531270331787909}
+  - component: {fileID: 187294279144295007}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -145,6 +146,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 1
+--- !u!114 &187294279144295007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510063706738234070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5bb608fd91a5b46a07083bac63b6d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationEventHandler
 --- !u!1 &2678657726362839742
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,8 +167,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8770116662669937994}
-  - component: {fileID: 4379952382987393473}
-  - component: {fileID: 2730579212471016990}
+  - component: {fileID: 1570894907364296956}
+  - component: {fileID: 7791674178116710291}
   m_Layer: 10
   m_Name: HitboxWeapon
   m_TagString: Untagged
@@ -178,8 +191,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4758530809859025240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4379952382987393473
-BoxCollider2D:
+--- !u!58 &1570894907364296956
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -208,23 +221,13 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &2730579212471016990
+  m_Radius: 0.5
+--- !u!114 &7791674178116710291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,10 +236,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2678657726362839742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6506619bd1251748ae55055fd604520, type: 3}
+  m_Script: {fileID: 11500000, guid: 260c0c5024fe87748a8fc51f1c535f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitBox
-  hitBool: 0
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHitBoxModifier
 --- !u!1 &3575970282553128904
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +343,6 @@ GameObject:
   - component: {fileID: 729106574178359906}
   - component: {fileID: 870816195974512120}
   - component: {fileID: 3026535042534623568}
-  - component: {fileID: 5166969650102929757}
   - component: {fileID: 8573041673517633212}
   m_Layer: 0
   m_Name: Player
@@ -422,7 +423,6 @@ MonoBehaviour:
   walkSpeed: 8
   jumpSpeed: 12
   dashForce: 20
-  stunned: 0
   isGrounded: 1
   groundCheck: {fileID: 1026584811682103399}
   groundCheckRadius: 0.2
@@ -473,27 +473,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &5166969650102929757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7563464024558420100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76d94d31b6b9b954b987547b8e476d39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackSystem
-  Gizmo: 1
-  currentWeapon: {fileID: 11400000, guid: e776c7eccc2adcb4aa5cbc32e1647513, type: 2}
-  hitBoxWeapon: {fileID: 4379952382987393473}
-  isAttacking: 0
-  canChainAttack: 0
-  comboIndex: 0
-  damage: 10
-  dirKnocBack: {x: 10, y: 10}
-  forceKnockback: 1000
 --- !u!114 &8573041673517633212
 MonoBehaviour:
   m_ObjectHideFlags: 0
