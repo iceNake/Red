@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 
 public enum AttackDirection { Up, Down, Right, Left, Neutral }
+public enum CharacterRestrictions {Move, Jump, Turn, Attack, Dodge}
 public class Player : Entity
 {
 
@@ -26,7 +27,13 @@ public class Player : Entity
     public float walkSpeed = 8f;
     public float jumpSpeed = 12f;
     public float dashForce = 20f;
-    public bool stunned;
+    private bool stunned;
+    
+    private bool _canMove;
+    private bool _canJump;
+    private bool _canTurn;
+    private bool _canAttack;
+    private bool _canDodge;
 
     private bool isDashing;
     private Vector2 _moveInput;
@@ -81,6 +88,12 @@ public class Player : Entity
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        _canAttack = true;
+        _canMove = true;
+        _canJump = true;
+        _canDodge = true;
+        _canTurn = true;
+
     }
 
     private void Update()
@@ -103,19 +116,19 @@ public class Player : Entity
     {
         _moveInput = _move.ReadValue<Vector2>();
 
-        if (_jump.WasPressedThisFrame())
+        if (_jump.WasPressedThisFrame() && _canJump)
         {
             Jump();
         }
 
-        if (_red.WasPressedThisFrame()) 
+        if (_red.WasPressedThisFrame() && _canAttack) 
         {
             AttackDirection dir = GetAttackDir(_moveInput);
             if (_attackSystem != null) _attackSystem.Attack(isGrounded, dir);
             _animator.SetTrigger(RedButtonHash);
         }
 
-        if (_dash.WasPressedThisFrame())
+        if (_dash.WasPressedThisFrame() && _canDodge)
         {
             Dash();
         }
@@ -177,16 +190,19 @@ public class Player : Entity
 
     private void Flip()
     {
-        if (_moveInput.x > 0)
+        if(_canTurn)
         {
-            Debug.Log("derecha");
-            spriteRenderer.flipX = false;
-        }
-        else if (_moveInput.x < 0)
-        {
-            Debug.Log("izquierda");
-            spriteRenderer.flipX = true;
-        }
+            if (_moveInput.x > 0)
+            {
+                Debug.Log("derecha");
+                spriteRenderer.flipX = false;
+            }
+            else if (_moveInput.x < 0)
+            {
+                Debug.Log("izquierda");
+                spriteRenderer.flipX = true;
+            }
+        }  
     }
 
     AttackDirection GetAttackDir(Vector2 input)
@@ -242,8 +258,37 @@ public class Player : Entity
         stunned = false;
         Debug.Log("Ya no estoy estuneado");
     }
-    
+    public void ChangeStateOnAnimationEvent(bool desiredState, CharacterRestrictions restrictionToChange)
+    {
+        switch(restrictionToChange)
+        {
+            case CharacterRestrictions.Attack:
+                _canAttack = desiredState;
+                break;
+
+            case CharacterRestrictions.Dodge: 
+                _canDodge = desiredState;
+                break;
+
+            case CharacterRestrictions.Jump:
+                _canJump = desiredState;
+                break;
+
+            case CharacterRestrictions.Turn:
+                _canTurn = desiredState;
+                break;
+
+            case CharacterRestrictions.Move:
+                _canMove = desiredState;
+                break;
+
+            default:
+                break;
+        }
+    }
+
 }
+
 
 public static class PlayerStrings
 {
