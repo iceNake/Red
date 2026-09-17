@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
   - {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
   - {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  - {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
   GroundedUpAttackSos: {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
   GroundedDownAttackSos: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
   GroundedRightAttackSos: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
