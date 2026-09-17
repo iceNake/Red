@@ -5,6 +5,7 @@ using System.Collections;
 public enum AttackDirection { Up, Down, Right, Left, Neutral }
 public class Player : Entity
 {
+
     [Header("Animator Hashes")]
     private static readonly int HorizontalHash = Animator.StringToHash("Horizontal");
     private static readonly int VerticalHash = Animator.StringToHash("Vertical");
