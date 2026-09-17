@@ -23,7 +23,7 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] private float _damageTest;
     #endregion
 
-    protected AttackSystem _attackSystem;
+    
     protected Rigidbody2D _rb;
 
     [SerializeField] private bool _isAlive = true;
@@ -60,10 +60,7 @@ public class Entity : MonoBehaviour, IDamageable
 
     protected virtual void Awake()
     {
-        if (_attackSystem == null)
-        {
-            _attackSystem = GetComponent<AttackSystem>();
-        }
+      
         _rb = GetComponent<Rigidbody2D>();
         _rb.freezeRotation = true;
     }

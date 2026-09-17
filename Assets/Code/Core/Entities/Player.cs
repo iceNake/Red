@@ -124,7 +124,6 @@ public class Player : Entity
         if (_red.WasPressedThisFrame() && _canAttack) 
         {
             AttackDirection dir = GetAttackDir(_moveInput);
-            if (_attackSystem != null) _attackSystem.Attack(isGrounded, dir);
             _animator.SetTrigger(RedButtonHash);
         }
 
