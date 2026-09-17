@@ -20,9 +20,14 @@ public class Enemy : Entity
     [SerializeField] private int _cost; //QUE NO SEA 0
     [SerializeField] private int _enemyId;//QUE NINGUNO SEA EL MISMO ENTRE ENEMIGOS Y QUE NO SEA 0
 
+
+    protected Vector2 leftKnockBackDirection;
+    protected Vector2 rightKnockBackDirection;
     protected override void Awake()
     {
         base.Awake(); 
+        leftKnockBackDirection = Vector2.zero;
+        rightKnockBackDirection = Vector2.zero;
     }
 
     protected virtual void OnEnable()
@@ -64,7 +69,7 @@ public class Enemy : Entity
 
     protected virtual void HandleChasing()
     {
-        FlipTowardsPlayer();
+        FlipTowardsPlayer(leftKnockBackDirection, rightKnockBackDirection);
     }
 
     protected virtual void HandleAttacking()
@@ -92,20 +97,20 @@ public class Enemy : Entity
        
     }
 
-    protected void FlipTowardsPlayer()
+    public virtual void FlipTowardsPlayer(Vector2 leftKnockBack, Vector2 rightKnockBack)
     {
         float direction = _playerRef.transform.position.x - transform.position.x;
         if (direction > 0.1f)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            _playerRef.attackLight.direction = new Vector2(-1, 1);
-            _playerRef.attackLight1.direction = new Vector2(-1, 1);
+            _playerRef.attackLight.direction = leftKnockBack;
+            _playerRef.attackLight1.direction = leftKnockBack;
         }
         else if (direction < -0.1f)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            _playerRef.attackLight.direction = new Vector2(1, 1);
-            _playerRef.attackLight1.direction = new Vector2(1, 1);
+            _playerRef.attackLight.direction = rightKnockBack;
+            _playerRef.attackLight1.direction = rightKnockBack;
         }
     }
 

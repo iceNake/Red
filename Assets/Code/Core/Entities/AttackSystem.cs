@@ -4,6 +4,9 @@ using NaughtyAttributes;
 
 public class AttackSystem : MonoBehaviour
 {
+    [Header("GIZMO")]
+    public bool Gizmo;
+
     [Header("Weapon")]
     public WeaponSO currentWeapon;
 
@@ -27,6 +30,19 @@ public class AttackSystem : MonoBehaviour
             hitBoxWeapon = GetComponent<BoxCollider2D>();
 
         hitBoxWeapon.gameObject.SetActive(false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (hitBoxWeapon != null)
+        {
+            Gizmos.matrix = transform.localToWorldMatrix;
+            Gizmos.color = Color.red;
+
+            Vector3 size3D = new Vector3(hitBoxWeapon.size.x, hitBoxWeapon.size.y, 0.1f);
+            Vector3 center3D = new Vector3(hitBoxWeapon.offset.x, hitBoxWeapon.offset.y, 0);
+            Gizmos.DrawWireCube(center3D, size3D);
+        }
     }
 
     #region Switch
@@ -150,9 +166,10 @@ public class AttackSystem : MonoBehaviour
     {
         isAttacking = true;
 
-        yield return new WaitForSeconds(attackSO.startup);
+        yield return new WaitForFixedUpdate();
         HitBox hitbox = hitBoxWeapon.GetComponent<HitBox>();
         hitbox.Init(this, gameObject);
+        hitBoxWeapon.gameObject.SetActive(false);
         hitBoxWeapon.size = attackSO.rangeAttack;
         hitBoxWeapon.gameObject.SetActive(true);
         damage = attackSO.damage;
@@ -167,7 +184,7 @@ public class AttackSystem : MonoBehaviour
 
         OpenComboWindow(attackSO);
 
-        yield return new WaitForSeconds(attackSO.endlag);
+        yield return new WaitForFixedUpdate();
 
         isAttacking = false;
         _attackCoroutine = null;

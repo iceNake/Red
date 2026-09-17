@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,12 +15,20 @@ public class Bear : Bulky
     [SerializeField] private Animator _animator;
 
     private float _lastAttackTime;
+    
+    [Header("Sprite")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
+    [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
+    [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
 
     protected override void Awake()
     {
         base.Awake();
         _animator = GetComponent<Animator>();
         InitializeStats();
+        leftKnockBackDirection = leftKnockBack;
+        rightKnockBackDirection = rightKnockBack;
     }
 
     private void InitializeStats()
@@ -101,14 +111,25 @@ public class Bear : Bulky
 
     public override void TakeDamage(float damage)
     {
+        
+        StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
         OnTakeDamage?.Invoke();
+        Debug.Log("<color=blue> Bear TakeDamage</color>");
     }
+    
 
     private void OnDrawGizmosSelected()
     {
         if (_bulkyData == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _bulkyData.explosionRadius);
+    }
+
+    IEnumerator SpriteRed()
+    {
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _spriteRenderer.color = Color.white;
     }
 }
