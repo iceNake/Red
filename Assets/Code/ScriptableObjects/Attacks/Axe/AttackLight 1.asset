@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: AttackLight 1
   m_EditorClassIdentifier: Assembly-CSharp::AttackSO
   damage: 10
-  direction: {x: 1, y: 1}
-  startup: 0.5
-  endlag: 0.5
-  forceKnockback: 100
-  rangeAttack: {x: 5, y: 5}
+  direction: {x: 4.16, y: 1}
+  forceKnockback: 100.76
   durationAttack: 0.5
-  comboWindow: 2
+  hitStunDuration: 0
+  offSet: {x: 0, y: 0}
+  radious: 0

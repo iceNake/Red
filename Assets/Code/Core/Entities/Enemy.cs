@@ -103,14 +103,14 @@ public class Enemy : Entity
         if (direction > 0.1f)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            _playerRef.attackLight.direction = leftKnockBack;
-            _playerRef.attackLight1.direction = leftKnockBack;
+            //_playerRef.attackLight.direction = leftKnockBack;
+            //_playerRef.attackLight1.direction = leftKnockBack;
         }
         else if (direction < -0.1f)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            _playerRef.attackLight.direction = rightKnockBack;
-            _playerRef.attackLight1.direction = rightKnockBack;
+            //_playerRef.attackLight.direction = rightKnockBack;
+            //_playerRef.attackLight1.direction = rightKnockBack;
         }
     }
 

@@ -2,12 +2,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Attacks")]
 public class AttackSO : ScriptableObject
 {
+    [Header("Damage & KnockBack")]
     public float damage;
     public Vector2 direction;
-    public float startup;
-    public float endlag;
     public float forceKnockback;
-    public Vector2 rangeAttack;
     public float durationAttack;
-    public float comboWindow;
+    public float hitStunDuration;
+    [Header("Hitbox")]
+    public Vector2 offSet;
+    public float radius; 
 }
