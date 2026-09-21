@@ -225,8 +225,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.96, y: 0.44}
-  m_Radius: 1.82
+  m_Offset: {x: -0.19, y: 0}
+  m_Radius: 2.96
 --- !u!114 &7791674178116710291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260c0c5024fe87748a8fc51f1c535f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHitBoxModifier
-  _hitBox: {fileID: 0}
+  _hitBox: {fileID: 1570894907364296956}
   weaponSO: {fileID: 0}
 --- !u!1 &3575970282553128904
 GameObject:

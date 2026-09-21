@@ -6,7 +6,6 @@ public class AttackSO : ScriptableObject
     public float damage;
     public Vector2 direction;
     public float forceKnockback;
-    public float durationAttack;
     public float hitStunDuration;
     [Header("Hitbox")]
     public Vector2 offSet;
