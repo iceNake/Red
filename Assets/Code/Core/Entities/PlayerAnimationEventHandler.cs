@@ -14,13 +14,14 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         _player.playerHitBoxModifier.DeActivateHitbox();
     }
 
-    public void EnableInterruption()
+    public void ReturnToNormal()
     {
         EnableAttack();
         EnableDodge();
         EnableJump();
         EnableTurn();
         EnableMove();
+        DisableHitbox();
     }
     public void DisableInterruption() 
     {
