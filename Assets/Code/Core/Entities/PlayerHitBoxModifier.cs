@@ -4,11 +4,14 @@ public class PlayerHitBoxModifier : MonoBehaviour
 {
     public CircleCollider2D _hitBox;
     public WeaponSO weaponSO;
-
+    public Player player;
     public void ActivateHitbox(int attackIndex)
     {
         AttackSO selectedAttack = GetAttack(attackIndex);
-        _hitBox.offset = selectedAttack.offSet;
+        if(player.isPlayerFlipped)
+            _hitBox.offset = selectedAttack.offSet * new Vector2(-1,0);
+        else
+            _hitBox.offset = selectedAttack.offSet;
         _hitBox.radius = selectedAttack.radius;
         _hitBox.enabled = true;
     }

@@ -34,6 +34,7 @@ public class Player : Entity
     private bool _canTurn;
     private bool _canAttack;
     private bool _canDodge;
+    
 
     private bool isDashing;
     private Vector2 _moveInput;
@@ -193,11 +194,13 @@ public class Player : Entity
             {
                 Debug.Log("derecha");
                 spriteRenderer.flipX = false;
+                isPlayerFlipped = false;
             }
             else if (_moveInput.x < 0)
             {
                 Debug.Log("izquierda");
                 spriteRenderer.flipX = true;
+                isPlayerFlipped = true;
             }
         }  
     }

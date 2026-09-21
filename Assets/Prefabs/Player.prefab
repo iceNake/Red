@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHitBoxModifier
   _hitBox: {fileID: 1570894907364296956}
   weaponSO: {fileID: 0}
+  player: {fileID: 870816195974512120}
 --- !u!1 &3575970282553128904
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,6 +426,7 @@ MonoBehaviour:
   walkSpeed: 8
   jumpSpeed: 12
   dashForce: 20
+  isPlayerFlipped: 0
   isGrounded: 1
   groundCheck: {fileID: 1026584811682103399}
   groundCheckRadius: 0.2

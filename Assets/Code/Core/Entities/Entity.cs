@@ -21,9 +21,10 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] private Vector2 _knockbackDirectionTest;
     [SerializeField] private float _knockbackForceTest;
     [SerializeField] private float _damageTest;
+    public bool isPlayerFlipped;
     #endregion
 
-    
+
     protected Rigidbody2D _rb;
 
     [SerializeField] private bool _isAlive = true;
