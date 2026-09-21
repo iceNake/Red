@@ -13,7 +13,27 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
     {
         _player.playerHitBoxModifier.DeActivateHitbox();
     }
-    public void EnableAttack()
+
+    public void ReturnToNormal()
+    {
+        EnableAttack();
+        EnableDodge();
+        EnableJump();
+        EnableTurn();
+        EnableMove();
+        DisableHitbox();
+    }
+    public void DisableInterruption() 
+    {
+        DisableAttack();
+        DisableDodge();
+        DisableJump();
+        DisableTurn();
+        DisableMove();
+    }
+
+    
+    private void EnableAttack()
     {
         _player.ChangeStateOnAnimationEvent(
             true,
@@ -21,7 +41,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void DisableAttack()
+    private void DisableAttack()
     {
         _player.ChangeStateOnAnimationEvent(
             false,
@@ -29,7 +49,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void EnableDodge()
+    private void EnableDodge()
     {
         _player.ChangeStateOnAnimationEvent(
             true,
@@ -37,7 +57,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void DisableDodge()
+    private void DisableDodge()
     {
         _player.ChangeStateOnAnimationEvent(
             false,
@@ -45,7 +65,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void EnableJump()
+    private void EnableJump()
     {
         _player.ChangeStateOnAnimationEvent(
             true,
@@ -53,7 +73,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void DisableJump()
+    private void DisableJump()
     {
         _player.ChangeStateOnAnimationEvent(
             false,
@@ -61,7 +81,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void EnableTurn()
+    private void EnableTurn()
     {
         _player.ChangeStateOnAnimationEvent(
             true,
@@ -69,7 +89,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void DisableTurn()
+    private void DisableTurn()
     {
         _player.ChangeStateOnAnimationEvent(
             false,
@@ -77,7 +97,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void EnableMove()
+    private void EnableMove()
     {
         _player.ChangeStateOnAnimationEvent(
             true,
@@ -85,7 +105,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 
-    public void DisableMove()
+    private void DisableMove()
     {
         _player.ChangeStateOnAnimationEvent(
             false,

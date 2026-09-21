@@ -226,7 +226,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.42
 --- !u!114 &7791674178116710291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260c0c5024fe87748a8fc51f1c535f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHitBoxModifier
+  _hitBox: {fileID: 1570894907364296956}
+  weaponSO: {fileID: 0}
 --- !u!1 &3575970282553128904
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,8 +436,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   spriteRenderer: {fileID: 7104531270331787909}
-  attackLight: {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
-  attackLight1: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
+  playerHitBoxModifier: {fileID: 0}
 --- !u!70 &3026535042534623568
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
