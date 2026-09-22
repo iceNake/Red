@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 243962529213628970}
   - component: {fileID: 7637219516160816829}
+  - component: {fileID: 7377785831864411079}
+  - component: {fileID: 4593440578614441279}
   m_Layer: 8
   m_Name: Red_Sprite
   m_TagString: Untagged
@@ -81,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -871729260, guid: 8f0a05091d381e44b9ef9ee54f02d870, type: 3}
+  m_Sprite: {fileID: 563752546, guid: 8f0a05091d381e44b9ef9ee54f02d870, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,6 +93,40 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &7377785831864411079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5517542223247282823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e631d47cae1255e4aa6d93c5ae076175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OsoAnimationEventHandler
+--- !u!95 &4593440578614441279
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5517542223247282823}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e83d42a3249156b4aa46ca7afb7b14cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8035308274354450036
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,10 +138,9 @@ GameObject:
   - component: {fileID: 5690344288020862514}
   - component: {fileID: 5147595770533899587}
   - component: {fileID: 775107278187111706}
-  - component: {fileID: 4865842686157884642}
-  - component: {fileID: 4026526391219986185}
+  - component: {fileID: -9147472238230629925}
   m_Layer: 10
-  m_Name: Bear
+  m_Name: BearTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,29 +236,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 14.492458, y: 4.584813}
   m_EdgeRadius: 0
---- !u!95 &4865842686157884642
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8035308274354450036}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e83d42a3249156b4aa46ca7afb7b14cf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4026526391219986185
+--- !u!114 &-9147472238230629925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,25 +245,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 8035308274354450036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7add8c8adc8967e498242df093217be0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b698ad8acea88a46a3811e7d1f871fa, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bear
+  m_EditorClassIdentifier: Assembly-CSharp::OsoTest
   _currentHealth: 100
   _maxHealth: 100
-  _currentSpeed: 5
-  _maxSpeed: 5
+  _currentSpeed: 0
+  _maxSpeed: 0
   _currentDamage: 0
   _maxDamage: 0
-  _knockbackDirectionTest: {x: 1, y: 0}
+  _knockbackDirectionTest: {x: 0, y: 0}
   _knockbackForceTest: 0
   _damageTest: 0
   isPlayerFlipped: 0
   _isAlive: 1
   _currentState: 0
   isStunned: 0
-  _detectionRange: 30
-  _cost: 10
-  _enemyId: 2
+  _detectionRange: 10
+  _cost: 1
+  _enemyId: 1
   _bulkyData: {fileID: 11400000, guid: e9717a73f37c797408cf2e220fb62726, type: 2}
   OnExplosionAttack:
     m_PersistentCalls:
@@ -258,10 +271,12 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  _animator: {fileID: 4865842686157884642}
-  _spriteRenderer: {fileID: 7637219516160816829}
+  _animator: {fileID: 0}
+  _attackHitbox: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
   leftKnockBack: {x: -1, y: 0}
   rightKnockBack: {x: 1, y: 0}
+  _KnockBackForce: 5
 --- !u!1 &8288595699071466298
 GameObject:
   m_ObjectHideFlags: 0
