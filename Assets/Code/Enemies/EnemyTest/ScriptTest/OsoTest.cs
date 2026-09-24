@@ -140,6 +140,7 @@ public class OsoTest : Bulky
         if (collision.TryGetComponent<Player>(out Player player))
         {
             player.TakeDamage(CurrentDamage);
+            Debug.Log("Le hize " + CurrentDamage );
         }
     }
 
