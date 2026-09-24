@@ -388,7 +388,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -421,12 +421,12 @@ MonoBehaviour:
   _knockbackDirectionTest: {x: 0, y: 0}
   _knockbackForceTest: 0
   _damageTest: 0
+  isPlayerFlipped: 0
   _isAlive: 1
   actions: {fileID: -944628639613478452, guid: 188fa70217d40f940984bffb91396a95, type: 3}
   walkSpeed: 8
   jumpSpeed: 12
   dashForce: 20
-  isPlayerFlipped: 0
   isGrounded: 1
   groundCheck: {fileID: 1026584811682103399}
   groundCheckRadius: 0.2
