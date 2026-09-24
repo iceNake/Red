@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7377785831864411079}
   - component: {fileID: 4593440578614441279}
   m_Layer: 8
-  m_Name: Red_Sprite
+  m_Name: Bear_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,6 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 0}
   leftKnockBack: {x: -1, y: 0}
   rightKnockBack: {x: 1, y: 0}
-  _KnockBackForce: 5
 --- !u!1 &8288595699071466298
 GameObject:
   m_ObjectHideFlags: 0

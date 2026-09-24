@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHitBoxModifier
   _hitBox: {fileID: 1570894907364296956}
-  weaponSO: {fileID: 0}
+  weaponSO: {fileID: 11400000, guid: e776c7eccc2adcb4aa5cbc32e1647513, type: 2}
   player: {fileID: 870816195974512120}
 --- !u!1 &3575970282553128904
 GameObject:
@@ -438,7 +438,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   spriteRenderer: {fileID: 7104531270331787909}
-  playerHitBoxModifier: {fileID: 0}
+  playerHitBoxModifier: {fileID: 7791674178116710291}
 --- !u!70 &3026535042534623568
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

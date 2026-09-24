@@ -12,8 +12,10 @@ public class PlayerHitBoxModifier : MonoBehaviour
             _hitBox.offset = selectedAttack.offSet * new Vector2(-1,0);
         else
             _hitBox.offset = selectedAttack.offSet;
+
         _hitBox.radius = selectedAttack.radius;
         _hitBox.enabled = true;
+        
     }
     public void DeActivateHitbox()
     {
