@@ -7,19 +7,18 @@ public class OsoTest : Bulky
 {
     [SerializeField] private BulkyData _bulkyData;
 
-    [Header("Events")]
-    public UnityEvent OnExplosionAttack;
-    public UnityEvent OnTakeDamage;
-
     [Header("Referencias")]
     [SerializeField] private Animator _animator;
-    [SerializeField] private Collider2D _attackHitbox;
+    [SerializeField] private OsoHitbox _attackHitbox;
 
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
     [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
     [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
+
+    private bool _isKnockBack;
+    [SerializeField] private float _knockBackDuration = 0.25f;
 
     private float _lastAttackTime;
     private bool _canMove = true;
@@ -35,8 +34,14 @@ public class OsoTest : Bulky
         leftKnockBackDirection = leftKnockBack;
         rightKnockBackDirection = rightKnockBack;
 
+        _attackHitbox = GetComponentInChildren<OsoHitbox>();
+        _attackHitbox.Initialized(this);
+
         if (_attackHitbox != null)
+        {
+            _attackHitbox.Initialized(this);
             _attackHitbox.enabled = false;
+        }
         
     }
 
@@ -81,7 +86,7 @@ public class OsoTest : Bulky
 
     private void MoveTowardsPlayer()
     {
-        if (!_canMove) return;
+        if (!_canMove || _isKnockBack) return;
 
         float direction = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
 
@@ -93,35 +98,27 @@ public class OsoTest : Bulky
     {
         if (_attackHitbox != null)
         {
-            _attackHitbox.enabled = true;
+            _attackHitbox.EnableCollider();
         }
-
-        Debug.Log("Oso HitboxActivada");
     }
 
     public void DisableHitbox()
     {
         if (_attackHitbox != null)
         {
-            _attackHitbox.enabled = false;
+            _attackHitbox.DisableCollider();
         }
-
-        Debug.Log("Oso HitboxDesactivada");
     }
 
     public void DisableMovement()
     {
         _canMove = false;
         _rb.linearVelocity = new Vector2 (0, _rb.linearVelocity.y);
-
-        Debug.Log("Oso NoMover");
     }
 
     public void EnableMovement()
     {
         _canMove = true;
-
-        Debug.Log("Oso SiMover");
     }
 
     public void EndAttack()
@@ -135,21 +132,13 @@ public class OsoTest : Bulky
         _animator.SetBool("Chasing", true);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<Player>(out Player player))
-        {
-            player.TakeDamage(CurrentDamage);
-            Debug.Log("Le hize " + CurrentDamage );
-        }
-    }
-
     public override void TakeDamage(float damage)
     {
         StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
 
-        OnTakeDamage?.Invoke();
+        StartCoroutine(KnockBackRoutine());
+
         Debug.Log("<color=blue> Oso Tomo daño</color>");
     }
 
@@ -160,6 +149,13 @@ public class OsoTest : Bulky
         yield return new WaitForSeconds(0.1f);
 
         _spriteRenderer.color = Color.white;
+    }
+
+    private IEnumerator KnockBackRoutine()
+    {
+        _isKnockBack = true;
+        yield return new WaitForSeconds(_knockBackDuration);
+        _isKnockBack = false;
     }
 
 

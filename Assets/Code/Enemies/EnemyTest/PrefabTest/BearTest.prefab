@@ -137,7 +137,8 @@ GameObject:
   m_Component:
   - component: {fileID: 467988953889373641}
   - component: {fileID: 6354958963193740147}
-  m_Layer: 10
+  - component: {fileID: 6067838371071578893}
+  m_Layer: 0
   m_Name: HitboxAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +196,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.41665936, y: 0}
   m_Radius: 5.570325
+--- !u!114 &6067838371071578893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779284204616038456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaeac76ed24e18240897be32e5c1aca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OsoHitbox
 --- !u!1 &8035308274354450036
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +257,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 15
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -319,10 +332,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OsoTest
   _currentHealth: 100
   _maxHealth: 100
-  _currentSpeed: 0
-  _maxSpeed: 0
-  _currentDamage: 0
-  _maxDamage: 0
+  _currentSpeed: 5
+  _maxSpeed: 5
+  _currentDamage: 20
+  _maxDamage: 20
   _knockbackDirectionTest: {x: 0, y: 0}
   _knockbackForceTest: 0
   _damageTest: 0
@@ -330,7 +343,7 @@ MonoBehaviour:
   _isAlive: 1
   _currentState: 0
   isStunned: 0
-  _detectionRange: 10
+  _detectionRange: 20
   _cost: 1
   _enemyId: 1
   _bulkyData: {fileID: 11400000, guid: e9717a73f37c797408cf2e220fb62726, type: 2}
@@ -340,9 +353,9 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  _animator: {fileID: 0}
-  _attackHitbox: {fileID: 0}
-  _spriteRenderer: {fileID: 0}
+  _animator: {fileID: 4593440578614441279}
+  _attackHitbox: {fileID: 6067838371071578893}
+  _spriteRenderer: {fileID: 7637219516160816829}
   leftKnockBack: {x: -1, y: 0}
   rightKnockBack: {x: 1, y: 0}
 --- !u!1 &8288595699071466298

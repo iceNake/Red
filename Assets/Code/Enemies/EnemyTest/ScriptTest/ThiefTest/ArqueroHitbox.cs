@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OsoHitbox : MonoBehaviour
+public class ArqueroHitbox : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

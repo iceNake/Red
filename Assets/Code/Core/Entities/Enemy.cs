@@ -145,4 +145,9 @@ public class Enemy : Entity
         isStunned = false;
         _rb.linearVelocity = Vector2.zero;
     }
+
+    protected virtual void HandleCustom()
+    {
+
+    }
 }
