@@ -1,5 +1,5 @@
 using UnityEngine;
-public enum RoomType { Start, Combat, Shop, MiniBoss, Boss, Event }
+public enum RoomType { Start, Combat, Shop, MiniBoss, Boss, Event, Default}
 
 [System.Serializable]
 public class LevelSlot
