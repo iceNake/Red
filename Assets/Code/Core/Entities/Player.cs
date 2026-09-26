@@ -2,11 +2,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public enum AttackDirection { Up, Down, Right, Left, Neutral }
-public enum CharacterRestrictions {Move, Jump, Turn, Attack, Dodge}
+public enum AttackDirection
+{
+    Up,
+    Down,
+    Right,
+    Left,
+    Neutral
+}
+
+public enum CharacterRestrictions
+{
+    Move,
+    Jump,
+    Turn,
+    Attack,
+    Dodge
+}
+
 public class Player : Entity
 {
-
     [Header("Animator Hashes")]
     private static readonly int HorizontalHash = Animator.StringToHash("Horizontal");
     private static readonly int VerticalHash = Animator.StringToHash("Vertical");
@@ -17,6 +32,7 @@ public class Player : Entity
 
     [Header("Input Settings")]
     public InputActionAsset actions;
+
     private InputAction _move;
     private InputAction _jump;
     private InputAction _red;
@@ -27,30 +43,33 @@ public class Player : Entity
     public float walkSpeed = 8f;
     public float jumpSpeed = 12f;
     public float dashForce = 20f;
+
     private bool stunned;
-    
+
     private bool _canMove;
     private bool _canJump;
     private bool _canTurn;
     private bool _canAttack;
     private bool _canDodge;
-    
 
     private bool isDashing;
     private Vector2 _moveInput;
+
     [SerializeField] private bool isGrounded;
 
     [Header("Detection Settings")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private Transform raycastOrigin;
+    [SerializeField] private float raycastLength = 0.2f;
     [SerializeField] private LayerMask groundLayer;
+
     [SerializeField] private float interactionRadius = 1.5f;
     [SerializeField] private LayerMask interactableLayer;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    [Header("AttackSystem")]
+    [Header("Attack System")]
     public PlayerHitBoxModifier playerHitBoxModifier;
+
     private Animator _animator;
 
     private void OnEnable()
@@ -58,7 +77,11 @@ public class Player : Entity
         if (actions != null)
         {
             var map = actions.FindActionMap("Player");
-            if (map != null) map.Enable();
+
+            if (map != null)
+            {
+                map.Enable();
+            }
         }
     }
 
@@ -67,16 +90,20 @@ public class Player : Entity
         if (actions != null)
         {
             var map = actions.FindActionMap("Player");
-            if (map != null) map.Disable();
+
+            if (map != null)
+            {
+                map.Disable();
+            }
         }
     }
 
     protected override void Awake()
     {
         base.Awake();
-        
+
         var map = actions.FindActionMap("Player");
-        
+
         _move = map.FindAction(PlayerStrings.PlayerInputStrings.move);
         _jump = map.FindAction(PlayerStrings.PlayerInputStrings.jump);
         _red = map.FindAction(PlayerStrings.PlayerInputStrings.red);
@@ -87,28 +114,45 @@ public class Player : Entity
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+
         _canAttack = true;
         _canMove = true;
         _canJump = true;
         _canDodge = true;
         _canTurn = true;
-
     }
 
     private void Update()
     {
-        if (stunned) return;
+        if (stunned)
+            return;
+
         InputRead();
         UpdateAnimatorParameters();
         Flip();
-        
-        if (Keyboard.current.escapeKey.wasPressedThisFrame) GameManager.Instance.TogglePause();
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            GameManager.Instance.TogglePause();
+        }
     }
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        CheckGrounded();
         ApplyMovement();
+    }
+
+    private void CheckGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            raycastOrigin.position,
+            Vector2.down,
+            raycastLength,
+            groundLayer
+        );
+
+        isGrounded = hit.collider != null;
     }
 
     public void InputRead()
@@ -120,9 +164,10 @@ public class Player : Entity
             Jump();
         }
 
-        if (_red.WasPressedThisFrame() && _canAttack) 
+        if (_red.WasPressedThisFrame() && _canAttack)
         {
             AttackDirection dir = GetAttackDir(_moveInput);
+
             _animator.SetTrigger(RedButtonHash);
         }
 
@@ -139,21 +184,35 @@ public class Player : Entity
 
     private void ApplyMovement()
     {
-        if (isDashing) return;
+        if (isDashing)
+            return;
+
+        if (!_canMove)
+            return;
 
         float horizontalSpeed = _moveInput.x * walkSpeed;
         float currentVerticalVelocity = _rb.linearVelocity.y;
 
-        _rb.linearVelocity = new Vector2(horizontalSpeed, currentVerticalVelocity);
+        _rb.linearVelocity = new Vector2(
+            horizontalSpeed,
+            currentVerticalVelocity
+        );
     }
 
     public void Jump()
     {
         if (isGrounded)
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0); 
-            _rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-            
+            _rb.linearVelocity = new Vector2(
+                _rb.linearVelocity.x,
+                0
+            );
+
+            _rb.AddForce(
+                Vector2.up * jumpSpeed,
+                ForceMode2D.Impulse
+            );
+
             _animator.SetTrigger(JumpHash);
         }
     }
@@ -165,7 +224,11 @@ public class Player : Entity
             isDashing = true;
 
             float dashDirection = Mathf.Sign(_moveInput.x);
-            _rb.linearVelocity = new Vector2(dashDirection * dashForce, 0);
+
+            _rb.linearVelocity = new Vector2(
+                dashDirection * dashForce,
+                0
+            );
 
             Invoke(nameof(EndDash), 0.2f);
         }
@@ -174,75 +237,110 @@ public class Player : Entity
         _animator.SetTrigger(DodgeHash);
     }
 
-    void EndDash()
+    private void EndDash()
     {
         isDashing = false;
     }
 
     private void UpdateAnimatorParameters()
     {
-        _animator.SetFloat(HorizontalHash, Mathf.Abs(_moveInput.x));
-        _animator.SetFloat(VerticalHash, _moveInput.y);
-        _animator.SetBool(IsGroundedHash, isGrounded);
+        _animator.SetFloat(
+            HorizontalHash,
+            Mathf.Abs(_moveInput.x)
+        );
+
+        _animator.SetFloat(
+            VerticalHash,
+            _moveInput.y
+        );
+
+        _animator.SetBool(
+            IsGroundedHash,
+            isGrounded
+        );
     }
 
     private void Flip()
     {
-        if(_canTurn)
+        if (_canTurn)
         {
             if (_moveInput.x > 0)
             {
                 Debug.Log("derecha");
+
                 spriteRenderer.flipX = false;
                 isPlayerFlipped = false;
             }
             else if (_moveInput.x < 0)
             {
                 Debug.Log("izquierda");
+
                 spriteRenderer.flipX = true;
                 isPlayerFlipped = true;
             }
-        }  
+        }
     }
 
-    AttackDirection GetAttackDir(Vector2 input)
+    private AttackDirection GetAttackDir(Vector2 input)
     {
-        // Umbral de 0.5f para evitar lecturas accidentales del joystick
-        if (input.y > 0.5f) return AttackDirection.Up;
-        if (input.y < -0.5f) return AttackDirection.Down;
-        if (input.x > 0.5f) return AttackDirection.Right;
-        if (input.x < -0.5f) return AttackDirection.Left;
+        if (input.y > 0.5f)
+            return AttackDirection.Up;
+
+        if (input.y < -0.5f)
+            return AttackDirection.Down;
+
+        if (input.x > 0.5f)
+            return AttackDirection.Right;
+
+        if (input.x < -0.5f)
+            return AttackDirection.Left;
+
         return AttackDirection.Neutral;
     }
 
     private void PerformInteraction()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, interactionRadius, interactableLayer);
-        if (hit != null) 
+        Collider2D hit = Physics2D.OverlapCircle(
+            transform.position,
+            interactionRadius,
+            interactableLayer
+        );
+
+        if (hit != null)
         {
             Debug.Log("Interactuando con: " + hit.name);
-            // Aquí iría la lógica de interacción (ej. hit.GetComponent<IInteractable>().Interact();)
+
             hit.GetComponent<IInteractable>().Interact();
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Visualizar el radio de interacción en el Editor
+       
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, interactionRadius);
 
-        // Visualizar el Ground Check
-        if (groundCheck != null)
+        Gizmos.DrawWireSphere(
+            transform.position,
+            interactionRadius
+        );
+
+        
+        if (raycastOrigin != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+
+            Gizmos.DrawLine(
+                raycastOrigin.position,
+                raycastOrigin.position +
+                Vector3.down * raycastLength
+            );
         }
     }
 
     public override void Die()
     {
         base.Die();
+
         GameEvents.OnPlayerDied?.Invoke();
     }
 
@@ -250,23 +348,31 @@ public class Player : Entity
     {
         StartCoroutine(StunCoroutine(duration));
     }
+
     private IEnumerator StunCoroutine(float duration)
     {
         stunned = true;
+
         Debug.Log("Stun en proceso");
+
         yield return new WaitForSeconds(duration);
+
         stunned = false;
+
         Debug.Log("Ya no estoy estuneado");
     }
-    public void ChangeStateOnAnimationEvent(bool desiredState, CharacterRestrictions restrictionToChange)
+
+    public void ChangeStateOnAnimationEvent(
+        bool desiredState,
+        CharacterRestrictions restrictionToChange)
     {
-        switch(restrictionToChange)
+        switch (restrictionToChange)
         {
             case CharacterRestrictions.Attack:
                 _canAttack = desiredState;
                 break;
 
-            case CharacterRestrictions.Dodge: 
+            case CharacterRestrictions.Dodge:
                 _canDodge = desiredState;
                 break;
 
@@ -286,9 +392,7 @@ public class Player : Entity
                 break;
         }
     }
-
 }
-
 
 public static class PlayerStrings
 {
