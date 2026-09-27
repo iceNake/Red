@@ -43,6 +43,8 @@ public class LevelGenerator : MonoBehaviour
                 return config.combatRoomsPool[Random.Range(0, config.combatRoomsPool.Count)];
             case RoomType.Event:
                 return config.eventRoomsPool[Random.Range(0, config.eventRoomsPool.Count)];
+            case RoomType.Default:
+                return config.defaultRoomsPool[Random.Range(0, config.defaultRoomsPool.Count)];
             default:
                 return null;
         }
