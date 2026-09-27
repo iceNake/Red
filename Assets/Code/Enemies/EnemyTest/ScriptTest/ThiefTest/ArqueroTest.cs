@@ -9,7 +9,14 @@ public class ArqueroTest : GlassCannon
 
     [Header("Referencias")]
     [SerializeField] private Animator _animator;
-    [SerializeField] private OsoHitbox _attackHitbox;
+    [SerializeField] private GameObject _arrowPrefab;
+    [SerializeField] private Transform _shootPoint;
+
+    [Header("Posicionamiento")]
+    [SerializeField] private float _positionTolerance = 0.3f;
+    [SerializeField] private float _minAttackDistance = 1.5f;
+    private float _positionedTimer;
+
 
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -57,15 +64,40 @@ public class ArqueroTest : GlassCannon
         CurrentDamage = _glassCannonData.damage;
     }
 
+    protected override void HandleIdle()
+    {
+        if (Vector2.Distance(transform.position, _playerRef.transform.position) < _detectionRange)
+        {
+            _animator.SetBool("Chasing", true);
+            ChangeState(State.Chasing);
+            _animator.SetBool("Attacking", false);
+        }
+    }
+
     protected override void HandleChasing()
     {
         base.HandleChasing();
         float distanceToPlayer = Vector2.Distance(transform.position, _playerRef.transform.position);
 
-        if (distanceToPlayer <= _glassCannonData.attackRange * 0.8f)
+        if (distanceToPlayer <= _minAttackDistance)
+        {
+            _subState = SubState.Positioning;
+            _positionedTimer = 0f;
+            _animator.SetBool("Attacking", false);
+            _animator.SetBool("Chasing", true);
+            ChangeState(State.Custom);
+
+        }
+        else if (distanceToPlayer <= _glassCannonData.attackRange * 0.8f)
+        {
             ChangeState(State.Attacking);
+            _animator.SetBool("Chasing", false);
+            _animator.SetBool("Attacking", true);
+        }
         else
+        {
             MoveTowardsPlayer();
+        }
     }
 
     public void MoveTowardsPlayer()
@@ -84,7 +116,6 @@ public class ArqueroTest : GlassCannon
     public void EnableMovement()
     {
         _canMove = true;
-
     }
 
     public void EndAttack()
@@ -99,6 +130,48 @@ public class ArqueroTest : GlassCannon
 
     public void HandlePositioning()
     {
+        float playerX = _playerRef.transform.position.x;
+        float myX = transform.position.x;
+
+        float distance = Mathf.Abs(playerX - myX);
+        float dirToPlayer = Mathf.Sign(playerX - myX);
+
+        float error = distance - _glassCannonData.attackRange;
+
+        if (Mathf.Abs(error) > _positionTolerance)
+        {
+            float moveDir = error > 0 ? dirToPlayer : -dirToPlayer;
+            _rb.linearVelocity = new Vector2(moveDir * CurrentSpeed, _rb.linearVelocity.y);
+            _positionedTimer = 0f;
+        }
+        else
+        {
+            _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
+            _positionedTimer += Time.deltaTime;
+
+            if (_positionedTimer >= _glassCannonData.attackCD)
+            {
+                
+                ChangeState(State.Attacking);
+                _animator.SetBool("Chasing", false);
+                _animator.SetBool("Attacking", true);
+            }
+        }
+
+    }
+
+    public void Shoot()
+    {
+        if (_playerRef == null) return;
+
+        Vector2 direction = (_playerRef.transform.position - _shootPoint.position).normalized;
+
+        GameObject projectile = Instantiate(_arrowPrefab, _shootPoint.position, Quaternion.identity);
+
+        if (projectile.TryGetComponent<EnemyProjectile>(out EnemyProjectile proj))
+        {
+            proj.Init(direction, CurrentDamage);
+        }
     }
 
 
@@ -108,8 +181,6 @@ public class ArqueroTest : GlassCannon
         base.TakeDamage(damage);
 
         StartCoroutine(KnockBackRoutine());
-
-        Debug.Log("<color=blue> Oso Tomo daño</color>");
     }
 
     private IEnumerator SpriteRed()
@@ -126,5 +197,24 @@ public class ArqueroTest : GlassCannon
         _isKnockBack = true;
         yield return new WaitForSeconds(_knockBackDuration);
         _isKnockBack = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _detectionRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _minAttackDistance);
+
+        if (_glassCannonData != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, _glassCannonData.attackRange);
+
+            Gizmos.color = new Color(0f, 1f, 1f, 0.5f);
+            Gizmos.DrawWireSphere(transform.position, _glassCannonData.attackRange + _positionTolerance);
+            Gizmos.DrawWireSphere(transform.position, _glassCannonData.attackRange - _positionTolerance);
+        }
     }
 }

@@ -1,16 +1,26 @@
 using UnityEngine;
 
-public class ArqueroAnimationEventHandler : MonoBehaviour
+public class ArqueroAnimationEventHandler : AnimationEventHandler
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private ArqueroTest _arquero => (ArqueroTest)animatedEntity;
+
+    public void Shoot()
     {
-        
+        _arquero.Shoot();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisableMovement()
     {
-        
+        _arquero.DisableMovement();
+    }
+
+    public void EnableMovement()
+    {
+        _arquero.EnableMovement();
+    }
+
+    public void EndAttack()
+    {
+        _arquero.EndAttack();
     }
 }

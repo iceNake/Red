@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1392885153941980214}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.58, y: 0, z: 0}
+  m_LocalScale: {x: 0.33529088, y: 0.4844, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3762366253714234703}
@@ -66,7 +66,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 1, y: -0.49999976}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.59, y: 4.12}
+  m_Size: {x: 4.59, y: 15.119999}
   m_EdgeRadius: 0
 --- !u!1 &5691441168395437167
 GameObject:
@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 6806012986338673920}
   - component: {fileID: 9063406581338627695}
   - component: {fileID: 3530432923271980961}
+  - component: {fileID: 6256761571833870657}
   m_Layer: 0
   m_Name: Thief_Sprite
   m_TagString: Untagged
@@ -106,7 +107,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4623, y: 2, z: 1}
+  m_LocalScale: {x: -0.52785426, y: 1.0557085, z: 0.52785426}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3762366253714234703}
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d7e1d53d40609e458c682b563bab98c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,7 +181,7 @@ Animator:
   m_GameObject: {fileID: 5691441168395437167}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 84f51a3e3fb2c134baadf89cda68f824, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -192,6 +193,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6256761571833870657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691441168395437167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271e2d99725a2244a839ca02d5c01a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArqueroAnimationEventHandler
 --- !u!1 &6009492322537219288
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,9 +216,9 @@ GameObject:
   - component: {fileID: 3762366253714234703}
   - component: {fileID: 6918594704459809670}
   - component: {fileID: 4102479445332601510}
-  - component: {fileID: 8504196344898896953}
+  - component: {fileID: 4280370732450281570}
   m_Layer: 10
-  m_Name: Archer
+  m_Name: ArcherTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,7 +303,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0013179779, y: 0.0051671267}
+  m_Offset: {x: 0.15961838, y: 0.0051670074}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -300,9 +313,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 6.11, y: 4.92}
+  m_Size: {x: 3.314968, y: 8.920002}
   m_EdgeRadius: 0
---- !u!114 &8504196344898896953
+--- !u!114 &4280370732450281570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,16 +324,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6009492322537219288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec11764249cd939419e78c8db29949b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 932ee2c27c50d014e856466152bb3121, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Thief
+  m_EditorClassIdentifier: Assembly-CSharp::ArqueroTest
   _currentHealth: 100
   _maxHealth: 100
   _currentSpeed: 5
   _maxSpeed: 5
-  _currentDamage: 0
-  _maxDamage: 0
-  _knockbackDirectionTest: {x: 1, y: 0}
+  _currentDamage: 5
+  _maxDamage: 5
+  _knockbackDirectionTest: {x: 1, y: 1}
   _knockbackForceTest: 0
   _damageTest: 0
   isPlayerFlipped: 0
@@ -329,19 +342,17 @@ MonoBehaviour:
   isStunned: 0
   _detectionRange: 30
   _cost: 1
-  _enemyId: 1
+  _enemyId: 3
   _glassCannonData: {fileID: 11400000, guid: 8c77fcd47cfc0814493ebba30e1ec337, type: 2}
-  OnRangeAttack:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  projectilePrefab: {fileID: 6048649899261429890, guid: 02444f6241660b2478c1e05d373cb509, type: 3}
-  firePoint: {fileID: 2279019047626359853}
-  leftKnockBack: {x: -1, y: 0.5}
-  rightKnockBack: {x: 1, y: 0.5}
+  _animator: {fileID: 3530432923271980961}
+  _arrowPrefab: {fileID: 6048649899261429890, guid: 02444f6241660b2478c1e05d373cb509, type: 3}
+  _shootPoint: {fileID: 2279019047626359853}
+  _positionTolerance: 6.9
+  _minAttackDistance: 18.34
   _spriteRenderer: {fileID: 9063406581338627695}
+  leftKnockBack: {x: -1, y: 1}
+  rightKnockBack: {x: 1, y: 1}
+  _knockBackDuration: 0.25
 --- !u!1 &8195837165201841142
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +378,7 @@ Transform:
   m_GameObject: {fileID: 8195837165201841142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 1.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
