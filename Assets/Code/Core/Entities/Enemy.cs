@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public enum State { Idle, Chasing, Attacking, Dead }
+public enum State { Idle, Chasing, Attacking, Dead, Custom }
 public class Enemy : Entity
 {
     [Header("State Machine")]
@@ -58,6 +58,9 @@ public class Enemy : Entity
                 break;
             case State.Attacking:
                 HandleAttacking();
+                break;
+            case State.Custom:
+                HandleCustom(); 
                 break;
         }
     }
@@ -144,5 +147,10 @@ public class Enemy : Entity
         yield return new WaitForSeconds(duration);
         isStunned = false;
         _rb.linearVelocity = Vector2.zero;
+    }
+
+    protected virtual void HandleCustom()
+    {
+
     }
 }

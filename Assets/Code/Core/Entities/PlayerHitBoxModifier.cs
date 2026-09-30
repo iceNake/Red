@@ -8,12 +8,21 @@ public class PlayerHitBoxModifier : MonoBehaviour
     public void ActivateHitbox(int attackIndex)
     {
         AttackSO selectedAttack = GetAttack(attackIndex);
-        if(player.isPlayerFlipped)
+
+        if (selectedAttack == null)
+        {
+            Debug.Log("No se encontro ningun AttackSO");
+            return;
+        }
+        
+        if (player.isPlayerFlipped)
             _hitBox.offset = selectedAttack.offSet * new Vector2(-1,0);
         else
             _hitBox.offset = selectedAttack.offSet;
+
         _hitBox.radius = selectedAttack.radius;
         _hitBox.enabled = true;
+        
     }
     public void DeActivateHitbox()
     {
@@ -23,7 +32,8 @@ public class PlayerHitBoxModifier : MonoBehaviour
     public AttackSO GetAttack(int index)
     {
         AttackSO attack;
-        if(index < 2)
+
+        if(index >= 0 && index <= 2)
         {
             attack = weaponSO.GroundedNeutralAttackSos[index];
         }
@@ -53,8 +63,8 @@ public class PlayerHitBoxModifier : MonoBehaviour
                     attack = weaponSO.AirSideAttackSos;
                     break;
                 default:
-                    attack = null;
                     Debug.Log("InvalidAttackIndex");
+                    attack = null;
                     break;
             }
         }
