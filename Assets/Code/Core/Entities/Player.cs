@@ -189,14 +189,16 @@ public class Player : Entity
 
         if (!_canMove)
             return;
+        else
+        {
+            float horizontalSpeed = _moveInput.x * walkSpeed;
+            float currentVerticalVelocity = _rb.linearVelocity.y;
 
-        float horizontalSpeed = _moveInput.x * walkSpeed;
-        float currentVerticalVelocity = _rb.linearVelocity.y;
-
-        _rb.linearVelocity = new Vector2(
-            horizontalSpeed,
-            currentVerticalVelocity
-        );
+            _rb.linearVelocity = new Vector2(
+                horizontalSpeed,
+                currentVerticalVelocity
+            );
+        }
     }
 
     public void Jump()
