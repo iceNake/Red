@@ -10,5 +10,6 @@ public class ScenarioData : ScriptableObject
 
     [Header("Pools de Variedad")]
     public List<GameObject> combatRoomsPool;
-    [FormerlySerializedAs("shopRoomsPool")] public List<GameObject> eventRoomsPool;
+    public List<GameObject> eventRoomsPool;
+    public List<GameObject> defaultRoomsPool;
 }

@@ -39,5 +39,18 @@ MonoBehaviour:
     fixedPrefab: {fileID: 3369868203514363026, guid: 32e5f70d27d353749b0f2624f6ef8779, type: 3}
   combatRoomsPool:
   - {fileID: 3369868203514363026, guid: baa77133a18ebcf4ba65cf9084dc14fd, type: 3}
+  - {fileID: 3369868203514363026, guid: c9692b09f371f42489b2bd79dd16a757, type: 3}
+  - {fileID: 3369868203514363026, guid: 2c932a6acaf9c684c992372cbc5f9a45, type: 3}
+  - {fileID: 3369868203514363026, guid: 63dc77d212cb0bb46a934f7b60e03745, type: 3}
+  - {fileID: 3369868203514363026, guid: 87c56da7758f6d143bd78cf7f383fa1f, type: 3}
+  - {fileID: 3369868203514363026, guid: 9fb3e85b5292cd64bb5963e9f1877eeb, type: 3}
+  - {fileID: 3369868203514363026, guid: 5baf056839fe5094f942f176a67791a1, type: 3}
+  - {fileID: 3369868203514363026, guid: 6673f432741dd0b42a50acb391ca1e96, type: 3}
   eventRoomsPool:
   - {fileID: 257498154865536231, guid: 49600b39e5f3be54fab627b4fb5846b7, type: 3}
+  defaultRoomsPool:
+  - {fileID: 257498154865536231, guid: a840d92b8ad0cd5478329f66a4ffedb5, type: 3}
+  - {fileID: 257498154865536231, guid: 40edebb3100a246459400ebb8d29f69d, type: 3}
+  - {fileID: 257498154865536231, guid: 662492c4a2414ab4d8b6753a2174b2fd, type: 3}
+  - {fileID: 257498154865536231, guid: eaef672b3f907ee46bc92db927248809, type: 3}
+  - {fileID: 257498154865536231, guid: 2a26466e7b98d3d45acb030d424f5aab, type: 3}
