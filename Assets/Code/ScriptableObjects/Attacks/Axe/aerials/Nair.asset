@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackSO
   damage: 7
   direction: {x: 1, y: 1}
-  forceKnockback: 5
+  forceKnockback: 15
   hitStunDuration: 1
   offSet: {x: -0.19, y: 0}
   radius: 2.96

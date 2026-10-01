@@ -14,15 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
   nameWeapon: Axe
   GroundedNeutralAttackSos:
-  - {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
-  - {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  - {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  GroundedUpAttackSos: {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
-  GroundedDownAttackSos: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  GroundedRightAttackSos: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  GroundedLeftAttackSos: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  AirNeutralAttackSos: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  AirUpAttackSOs: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  AirDownAttackSos: {fileID: 11400000, guid: 09565d8d706ab7142ad23f7e458c5fcb, type: 2}
-  AirRightAttackSos: {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
-  AirLeftAttackSos: {fileID: 11400000, guid: 16e96319590bb734f9bd18393cb74909, type: 2}
+  - {fileID: 11400000, guid: 3024bce002dae3e4bbe531613574b6a6, type: 2}
+  - {fileID: 11400000, guid: 2835239a6c73cf14f88302385d6d95db, type: 2}
+  - {fileID: 11400000, guid: f2925ffd5c50a8546b43a49892647cce, type: 2}
+  GroundedUpAttackSos: {fileID: 11400000, guid: 22affd60e55e4014c9128c1604702aaa, type: 2}
+  GroundedDownAttackSos: {fileID: 11400000, guid: 207e6d31b94db5f44bec70e5d87317a6, type: 2}
+  GroundedSideAttackSos: {fileID: 11400000, guid: 57adfa4b03004ac46b6906e7d5629819, type: 2}
+  AirNeutralAttackSos: {fileID: 11400000, guid: a69ae6b30cd3ad546a5ff6dd51d49546, type: 2}
+  AirUpAttackSOs: {fileID: 11400000, guid: 08f75770af88fc54795608aa1bee88fd, type: 2}
+  AirDownAttackSos: {fileID: 11400000, guid: 8aa676abc7c833d49b8ec84779261322, type: 2}
+  AirSideAttackSos: {fileID: 11400000, guid: dcc7b6442e25ffa4c9b6a8881591ac1d, type: 2}

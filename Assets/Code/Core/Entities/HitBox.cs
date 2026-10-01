@@ -4,10 +4,12 @@ public class HitBox : MonoBehaviour
 {
     [SerializeField] private Entity owner;
     public AttackSO attackData;
+    
 
     private void Start()
     {
         owner = GetComponentInParent<Entity>();
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
