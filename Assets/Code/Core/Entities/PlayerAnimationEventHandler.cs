@@ -7,6 +7,15 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
     
     public void EnableHitbox(int attackIndex)
     {
+        Debug.Log($"Player encontrado: {_player}");
+        Debug.Log($"HitboxModifier encontrado: {_player.playerHitBoxModifier}");
+
+        Debug.Log(_player.playerHitBoxModifier + "   modifier");
+        Debug.Log(_player + "   player");
+
+
+        Debug.Log(attackIndex + "   INDEX");
+
         _player.playerHitBoxModifier.ActivateHitbox(attackIndex);
     }
     public void DisableHitbox() 
