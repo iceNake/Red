@@ -5,23 +5,28 @@ public class PlayerHitBoxModifier : MonoBehaviour
     public CircleCollider2D _hitBox;
     public WeaponSO weaponSO;
     public Player player;
+    
+    public HitBox hitBoxClass;
+    
     public void ActivateHitbox(int attackIndex)
     {
-        AttackSO selectedAttack = GetAttack(attackIndex);
+        AttackSO _selectedAttack = GetAttack(attackIndex);
+        hitBoxClass.attackData = _selectedAttack;
 
-        if (selectedAttack == null)
+        if (_selectedAttack == null)
         {
             Debug.Log("No se encontro ningun AttackSO");
             return;
         }
-        
-        if (player.isPlayerFlipped)
-            _hitBox.offset = selectedAttack.offSet * new Vector2(-1,0);
-        else
-            _hitBox.offset = selectedAttack.offSet;
 
-        _hitBox.radius = selectedAttack.radius;
         _hitBox.enabled = true;
+        if (player.isPlayerFlipped)
+            _hitBox.offset = _selectedAttack.offSet * new Vector2(-1,0);
+        else
+            _hitBox.offset = _selectedAttack.offSet;
+
+        _hitBox.radius = _selectedAttack.radius;
+        
         
     }
     public void DeActivateHitbox()

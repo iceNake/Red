@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 8770116662669937994}
   - component: {fileID: 1570894907364296956}
   - component: {fileID: 7791674178116710291}
+  - component: {fileID: 8904777852950962800}
   m_Layer: 10
   m_Name: HitboxWeapon
   m_TagString: Untagged
@@ -221,7 +222,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -242,6 +243,21 @@ MonoBehaviour:
   _hitBox: {fileID: 1570894907364296956}
   weaponSO: {fileID: 11400000, guid: e776c7eccc2adcb4aa5cbc32e1647513, type: 2}
   player: {fileID: 870816195974512120}
+  hitBoxClass: {fileID: 8904777852950962800}
+--- !u!114 &8904777852950962800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678657726362839742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030429cebeaa50a48952fab9f51ee78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitBox
+  owner: {fileID: 870816195974512120}
+  attackData: {fileID: 0}
 --- !u!1 &3575970282553128904
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +473,7 @@ MonoBehaviour:
   _isAlive: 1
   actions: {fileID: -944628639613478452, guid: 188fa70217d40f940984bffb91396a95, type: 3}
   walkSpeed: 8
-  jumpSpeed: 12
+  jumpSpeed: 20
   dashForce: 20
   isGrounded: 1
   raycastOrigin: {fileID: 3303929968779078122}
