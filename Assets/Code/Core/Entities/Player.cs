@@ -143,6 +143,15 @@ public class Player : Entity
         ApplyMovement();
     }
 
+    public virtual void ApplyMomentum(Vector2 knockbackDirection, float knockbackForce)
+    {
+        Vector2 directionForKnockback = knockbackDirection.normalized;
+
+        _rb.linearVelocity = Vector2.zero;
+        _rb.AddForce(directionForKnockback * knockbackForce, ForceMode2D.Impulse);
+
+        Debug.Log("<color=blue> Hey! You knocked the air out of me (Got knockback) </color>");
+    }
     private void CheckGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(
