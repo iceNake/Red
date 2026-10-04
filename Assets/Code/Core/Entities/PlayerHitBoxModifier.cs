@@ -18,14 +18,19 @@ public class PlayerHitBoxModifier : MonoBehaviour
             Debug.Log("No se encontro ningun AttackSO");
             return;
         }
-        player.ApplyMomentum(_selectedAttack.momentumDirection, _selectedAttack.momentumForce);
+        
 
         _hitBox.enabled = true;
         if (player.isPlayerFlipped)
-            _hitBox.offset = _selectedAttack.offSet * new Vector2(-1,0);
+        {
+            _hitBox.offset = _selectedAttack.offSet * new Vector2(-1, 1);
+            player.ApplyMomentum(_selectedAttack.momentumDirection * new Vector2(-1, 1), _selectedAttack.momentumForce);
+        }
         else
+        {
             _hitBox.offset = _selectedAttack.offSet;
-
+            player.ApplyMomentum(_selectedAttack.momentumDirection, _selectedAttack.momentumForce);
+        }
         _hitBox.radius = _selectedAttack.radius;
         
         

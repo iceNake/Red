@@ -43,9 +43,10 @@ public class Player : Entity
     public float walkSpeed = 8f;
     public float jumpSpeed = 12f;
     public float dashForce = 20f;
+    public int maxJumps;
 
     private bool stunned;
-
+    private int remainingJumps;
     private bool _canMove;
     private bool _canJump;
     private bool _canTurn;
@@ -162,6 +163,9 @@ public class Player : Entity
         );
 
         isGrounded = hit.collider != null;
+        if (isGrounded)
+            remainingJumps = maxJumps; 
+        
     }
 
     public void InputRead()
@@ -212,7 +216,7 @@ public class Player : Entity
 
     public void Jump()
     {
-        if (isGrounded)
+        if (remainingJumps > 0)
         {
             _rb.linearVelocity = new Vector2(
                 _rb.linearVelocity.x,
@@ -225,6 +229,7 @@ public class Player : Entity
             );
 
             _animator.SetTrigger(JumpHash);
+            remainingJumps--;
         }
     }
 
