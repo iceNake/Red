@@ -475,6 +475,7 @@ MonoBehaviour:
   walkSpeed: 8
   jumpSpeed: 20
   dashForce: 20
+  maxJumps: 2
   isGrounded: 1
   raycastOrigin: {fileID: 3303929968779078122}
   raycastLength: 0.2

@@ -15,7 +15,8 @@ MonoBehaviour:
   damage: 5
   direction: {x: 0, y: -10}
   forceKnockback: 60
-  durationAttack: 0
   hitStunDuration: 1
   offSet: {x: 2.69, y: 0.78}
   radius: 1.73
+  momentumDirection: {x: 0, y: 0}
+  momentumForce: 0
