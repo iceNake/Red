@@ -18,6 +18,7 @@ public class PlayerHitBoxModifier : MonoBehaviour
             Debug.Log("No se encontro ningun AttackSO");
             return;
         }
+        player.ApplyMomentum(_selectedAttack.momentumDirection, _selectedAttack.momentumForce);
 
         _hitBox.enabled = true;
         if (player.isPlayerFlipped)

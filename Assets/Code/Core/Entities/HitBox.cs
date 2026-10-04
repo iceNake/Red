@@ -14,11 +14,12 @@ public class HitBox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Entity hitEntity = collision.gameObject.GetComponent<Entity>();
-        if (hitEntity != owner && attackData != null)
-        {
-            Debug.Log("entity hit");
-            HitOtherEntity(hitEntity);
-        }
+        if(hitEntity != null)
+            if (hitEntity != owner && attackData != null)
+            {
+                Debug.Log("entity hit");
+                HitOtherEntity(hitEntity);
+            }
     }
 
     public void HitOtherEntity(Entity entity)

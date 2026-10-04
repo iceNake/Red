@@ -9,5 +9,8 @@ public class AttackSO : ScriptableObject
     public float hitStunDuration;
     [Header("Hitbox")]
     public Vector2 offSet;
-    public float radius; 
+    public float radius;
+    [Header("Momentum")]
+    public Vector2 momentumDirection;
+    public float momentumForce;
 }
