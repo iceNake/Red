@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulkyData
   maxHealth: 100
   damage: 20
-  moveSpeed: 2
-  explosionRadius: 5
+  moveSpeed: 5
+  explosionRadius: 6.9
   attackCooldown: 3
   playerLayer:
     serializedVersion: 2

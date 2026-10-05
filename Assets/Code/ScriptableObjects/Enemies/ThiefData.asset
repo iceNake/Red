@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GlassCannonData
   maxHealth: 30
   damage: 50
-  moveSpeed: 2
+  moveSpeed: 10
   playerLayer:
     serializedVersion: 2
     m_Bits: 1

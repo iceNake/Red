@@ -14,10 +14,7 @@ public class OsoTest : Bulky
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
-    [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
-
-    private bool _isKnockBack;
+    public bool _isKnockBack;
     [SerializeField] private float _knockBackDuration = 0.25f;
 
     private float _lastAttackTime;
@@ -31,8 +28,7 @@ public class OsoTest : Bulky
 
         InitialazeStats();
 
-        leftKnockBackDirection = leftKnockBack;
-        rightKnockBackDirection = rightKnockBack;
+
 
         _attackHitbox = GetComponentInChildren<OsoHitbox>();
         _attackHitbox.Initialized(this);
@@ -42,7 +38,7 @@ public class OsoTest : Bulky
             _attackHitbox.Initialized(this);
             _attackHitbox.enabled = false;
         }
-        
+
     }
 
     private void InitialazeStats()
@@ -113,7 +109,7 @@ public class OsoTest : Bulky
     public void DisableMovement()
     {
         _canMove = false;
-        _rb.linearVelocity = new Vector2 (0, _rb.linearVelocity.y);
+        _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
     }
 
     public void EnableMovement()
@@ -158,8 +154,9 @@ public class OsoTest : Bulky
         _isKnockBack = false;
     }
 
-
-
-
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _bulkyData.explosionRadius);
+    }
 }
