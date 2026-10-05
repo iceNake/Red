@@ -15,7 +15,6 @@ public class ArqueroTest : GlassCannon
     [Header("Posicionamiento")]
     [SerializeField] private float _positionTolerance = 0.3f;
     [SerializeField] private float _minAttackDistance = 1.5f;
-    private float _positionedTimer;
 
 
     [Header("Sprite")]
@@ -27,7 +26,6 @@ public class ArqueroTest : GlassCannon
     private bool _isKnockBack;
     [SerializeField] private float _knockBackDuration = 0.25f;
 
-    private float _lastAttackTime;
     private bool _canMove = true;
 
     protected override void Awake()
@@ -71,6 +69,7 @@ public class ArqueroTest : GlassCannon
             _animator.SetBool("Chasing", true);
             ChangeState(State.Chasing);
             _animator.SetBool("Attacking", false);
+            StartCoroutine(ShootRoutine());
         }
     }
 
@@ -79,20 +78,13 @@ public class ArqueroTest : GlassCannon
         base.HandleChasing();
         float distanceToPlayer = Vector2.Distance(transform.position, _playerRef.transform.position);
 
-        if (distanceToPlayer <= _minAttackDistance)
+        if (distanceToPlayer <= _glassCannonData.attackRange)
         {
             _subState = SubState.Positioning;
-            _positionedTimer = 0f;
             _animator.SetBool("Attacking", false);
             _animator.SetBool("Chasing", true);
             ChangeState(State.Custom);
 
-        }
-        else if (distanceToPlayer <= _glassCannonData.attackRange * 0.8f)
-        {
-            ChangeState(State.Attacking);
-            _animator.SetBool("Chasing", false);
-            _animator.SetBool("Attacking", true);
         }
         else
         {
@@ -121,11 +113,9 @@ public class ArqueroTest : GlassCannon
     public void EndAttack()
     {
         EnableMovement();
-
-        ChangeState(State.Chasing);
-
         _animator.SetBool("Attacking", false);
         _animator.SetBool("Chasing", true);
+        ChangeState(State.Custom);
     }
 
     public void HandlePositioning()
@@ -138,24 +128,16 @@ public class ArqueroTest : GlassCannon
 
         float error = distance - _glassCannonData.attackRange;
 
+
+
         if (Mathf.Abs(error) > _positionTolerance)
         {
             float moveDir = error > 0 ? dirToPlayer : -dirToPlayer;
             _rb.linearVelocity = new Vector2(moveDir * CurrentSpeed, _rb.linearVelocity.y);
-            _positionedTimer = 0f;
         }
         else
         {
             _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
-            _positionedTimer += Time.deltaTime;
-
-            if (_positionedTimer >= _glassCannonData.attackCD)
-            {
-                
-                ChangeState(State.Attacking);
-                _animator.SetBool("Chasing", false);
-                _animator.SetBool("Attacking", true);
-            }
         }
 
     }
@@ -199,22 +181,17 @@ public class ArqueroTest : GlassCannon
         _isKnockBack = false;
     }
 
-    private void OnDrawGizmos()
+
+
+    private IEnumerator ShootRoutine()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _detectionRange);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _minAttackDistance);
-
-        if (_glassCannonData != null)
+        while (true)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, _glassCannonData.attackRange);
+            yield return new WaitForSeconds(_glassCannonData.attackCD);
+            ChangeState(State.Attacking);
+            _animator.SetBool("Attacking", true);
+            _animator.SetBool("Chasing", false);
 
-            Gizmos.color = new Color(0f, 1f, 1f, 0.5f);
-            Gizmos.DrawWireSphere(transform.position, _glassCannonData.attackRange + _positionTolerance);
-            Gizmos.DrawWireSphere(transform.position, _glassCannonData.attackRange - _positionTolerance);
         }
     }
 }
