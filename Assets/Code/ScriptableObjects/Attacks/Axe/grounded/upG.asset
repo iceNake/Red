@@ -19,4 +19,4 @@ MonoBehaviour:
   offSet: {x: 1.03, y: 0.98}
   radius: 2.03
   momentumDirection: {x: 0, y: 1}
-  momentumForce: 20
+  momentumForce: 25

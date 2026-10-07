@@ -18,3 +18,5 @@ MonoBehaviour:
   hitStunDuration: 1
   offSet: {x: 2.76, y: 1.12}
   radius: 1.66
+  momentumDirection: {x: 1, y: 0}
+  momentumForce: 100
