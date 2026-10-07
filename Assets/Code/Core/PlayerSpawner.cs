@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class PlayerSpawner : MonoBehaviour
 {
@@ -31,6 +32,22 @@ public class PlayerSpawner : MonoBehaviour
         if (currentPlayerInstance != null) Destroy(currentPlayerInstance);
         
         currentPlayerInstance = Instantiate(playerPrefab, targetSpawn.position, targetSpawn.rotation);
+        AssignPlayerToCamera(currentPlayerInstance.transform);
         Debug.Log("<color=green><b>[PlayerSpawner]</b> Jugador instanciado exitosamente.</color>");
+    }
+    
+    private void AssignPlayerToCamera(Transform playerTransform)
+    {
+        CinemachineCamera cam = Object.FindFirstObjectByType<CinemachineCamera>();
+        
+        if (cam != null)
+        {
+            cam.Follow = playerTransform;
+            cam.LookAt = playerTransform; 
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSpawner] No se encontró ninguna CinemachineCamera en la escena.");
+        }
     }
 }
