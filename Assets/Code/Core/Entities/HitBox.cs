@@ -25,10 +25,16 @@ public class HitBox : MonoBehaviour
     public void HitOtherEntity(Entity entity)
     {
         entity.TakeDamage(attackData.damage);
-        if(owner.isPlayerFlipped)
-            entity.TakeKnockback(attackData.direction * new Vector2(-1,0), attackData.forceKnockback);
+        Vector2 knockbackDirection;
+        if (owner.isPlayerFlipped)
+        {
+            knockbackDirection = attackData.direction * new Vector2(-1, 1);
+        }
         else
-            entity.TakeKnockback(attackData.direction, attackData.forceKnockback);
+        {
+            knockbackDirection = attackData.direction;
+        }
+            entity.TakeKnockback(knockbackDirection, attackData.forceKnockback);
         //falta el hitStun
     }
 }
