@@ -14,8 +14,6 @@ public class OsoTest : Bulky
     [Header("Sprite")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    public bool _isKnockBack;
-    [SerializeField] private float _knockBackDuration = 0.25f;
 
     private float _lastAttackTime;
     private bool _canMove = true;
@@ -82,7 +80,7 @@ public class OsoTest : Bulky
 
     private void MoveTowardsPlayer()
     {
-        if (!_canMove || _isKnockBack) return;
+        if (!_canMove || isStunned) return;
 
         float direction = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
 
@@ -133,7 +131,6 @@ public class OsoTest : Bulky
         StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
 
-        StartCoroutine(KnockBackRoutine());
 
         Debug.Log("<color=blue> Oso Tomo daño</color>");
     }
@@ -145,13 +142,6 @@ public class OsoTest : Bulky
         yield return new WaitForSeconds(0.1f);
 
         _spriteRenderer.color = Color.white;
-    }
-
-    private IEnumerator KnockBackRoutine()
-    {
-        _isKnockBack = true;
-        yield return new WaitForSeconds(_knockBackDuration);
-        _isKnockBack = false;
     }
 
     private void OnDrawGizmos()

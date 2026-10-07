@@ -14,7 +14,6 @@ public class ArqueroTest : GlassCannon
 
     [Header("Posicionamiento")]
     [SerializeField] private float _positionTolerance = 0.3f;
-    [SerializeField] private float _minAttackDistance = 1.5f;
 
 
     [Header("Sprite")]
@@ -22,9 +21,6 @@ public class ArqueroTest : GlassCannon
 
     [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
     [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
-
-    private bool _isKnockBack;
-    [SerializeField] private float _knockBackDuration = 0.25f;
 
     private bool _canMove = true;
 
@@ -94,7 +90,7 @@ public class ArqueroTest : GlassCannon
 
     public void MoveTowardsPlayer()
     {
-        if (!_canMove || _isKnockBack) return;
+        if (!_canMove || isStunned) return;
         float direction = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
         _rb.linearVelocity = new Vector2(direction * CurrentSpeed, _rb.linearVelocity.y);
     }
@@ -161,8 +157,6 @@ public class ArqueroTest : GlassCannon
     {
         StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
-
-        StartCoroutine(KnockBackRoutine());
     }
 
     private IEnumerator SpriteRed()
@@ -172,13 +166,6 @@ public class ArqueroTest : GlassCannon
         yield return new WaitForSeconds(0.1f);
 
         _spriteRenderer.color = Color.white;
-    }
-
-    private IEnumerator KnockBackRoutine()
-    {
-        _isKnockBack = true;
-        yield return new WaitForSeconds(_knockBackDuration);
-        _isKnockBack = false;
     }
 
 
