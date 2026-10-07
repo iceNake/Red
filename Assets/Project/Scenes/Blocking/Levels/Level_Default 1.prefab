@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 6400694341892264620}
   - component: {fileID: 1210469455884210473}
   - component: {fileID: 5713188848897735562}
+  - component: {fileID: 6378590476322007915}
   m_Layer: 7
   m_Name: Piso (3)
   m_TagString: Untagged
@@ -80,7 +81,7 @@ Transform:
   m_GameObject: {fileID: 1749648364180085909}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.84, y: 8.2, z: 0}
+  m_LocalPosition: {x: 26.84, y: 16.43, z: 0}
   m_LocalScale: {x: 9.76423, y: 0.74785995, z: 1.14211}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -174,7 +175,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -189,6 +190,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &6378590476322007915
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749648364180085909}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1780745433388353229
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +221,7 @@ GameObject:
   - component: {fileID: 7823580495807985459}
   - component: {fileID: 436541298921787349}
   - component: {fileID: 7450264084147069638}
+  - component: {fileID: 4826881496995966385}
   m_Layer: 7
   m_Name: Piso (2)
   m_TagString: Untagged
@@ -217,7 +238,7 @@ Transform:
   m_GameObject: {fileID: 1780745433388353229}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.92, y: 4.05, z: 0}
+  m_LocalPosition: {x: 41.92, y: 10.08, z: 0}
   m_LocalScale: {x: 9.76423, y: 0.74785995, z: 1.14211}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -311,7 +332,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -326,6 +347,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &4826881496995966385
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780745433388353229}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &3658979531173351390
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +378,7 @@ GameObject:
   - component: {fileID: 3685996009757642194}
   - component: {fileID: 68942561127772851}
   - component: {fileID: 7533878586368771190}
+  - component: {fileID: 4050195199470300126}
   m_Layer: 7
   m_Name: Piso (1)
   m_TagString: Untagged
@@ -354,7 +395,7 @@ Transform:
   m_GameObject: {fileID: 3658979531173351390}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.6, y: 4.05, z: 0}
+  m_LocalPosition: {x: 12.6, y: 9.34, z: 0}
   m_LocalScale: {x: 9.76423, y: 0.74785995, z: 1.14211}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -448,7 +489,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -463,6 +504,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &4050195199470300126
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658979531173351390}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &3816814639579918189
 GameObject:
   m_ObjectHideFlags: 0

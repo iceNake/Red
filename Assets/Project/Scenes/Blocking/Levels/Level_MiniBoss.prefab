@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 257498154865536231}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 150.74149, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -80,7 +80,7 @@ Transform:
   m_GameObject: {fileID: 1057486795914677580}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -124.51709, y: -3.5967, z: 0}
+  m_LocalPosition: {x: -2.9670944, y: -3.5967, z: 0}
   m_LocalScale: {x: 58.851448, y: 3.2914999, z: 5.02667}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 7550400591040282420}
   - component: {fileID: 1921214051126843488}
   - component: {fileID: 3877273995897123578}
+  - component: {fileID: 8182595891271794370}
   m_Layer: 7
   m_Name: Piso (1)
   m_TagString: Untagged
@@ -217,7 +218,7 @@ Transform:
   m_GameObject: {fileID: 2278584027330243965}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -138.14148, y: 4.05, z: 0}
+  m_LocalPosition: {x: -16.591484, y: 10.41, z: 0}
   m_LocalScale: {x: 9.76423, y: 0.74785995, z: 1.14211}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -311,7 +312,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -326,6 +327,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &8182595891271794370
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2278584027330243965}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &3816814639579918189
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 3816814639579918189}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -153.95, y: -3.49, z: 0}
+  m_LocalPosition: {x: -32.4, y: -3.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -429,6 +449,7 @@ GameObject:
   - component: {fileID: 1099103575101371302}
   - component: {fileID: 2951071459515468934}
   - component: {fileID: 7681007688476323706}
+  - component: {fileID: 2824298437707050480}
   m_Layer: 7
   m_Name: Piso (2)
   m_TagString: Untagged
@@ -445,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 4648189484000025437}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -108.82149, y: 4.05, z: 0}
+  m_LocalPosition: {x: 12.728508, y: 10.41, z: 0}
   m_LocalScale: {x: 9.76423, y: 0.74785995, z: 1.14211}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -539,7 +560,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -554,6 +575,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &2824298437707050480
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4648189484000025437}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &6980878780540893836
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +620,7 @@ Transform:
   m_GameObject: {fileID: 6980878780540893836}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -95.05, y: -3.49, z: 0}
+  m_LocalPosition: {x: 26.499992, y: -3.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -670,7 +710,7 @@ Transform:
   m_GameObject: {fileID: 8188728400705392957}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -123.8, y: 8.01, z: 0}
+  m_LocalPosition: {x: -2.2500076, y: 8.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
