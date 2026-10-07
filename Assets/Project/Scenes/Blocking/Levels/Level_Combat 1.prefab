@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 3202071042533869032}
   - component: {fileID: 3960166674168538606}
   - component: {fileID: 1526427035060110981}
+  - component: {fileID: 5391685822361059764}
   m_Layer: 7
   m_Name: Piso (4)
   m_TagString: Untagged
@@ -119,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 1688136597766848213}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 181.7, y: 3.39, z: 0}
+  m_LocalPosition: {x: 181.7, y: 7.91, z: 0}
   m_LocalScale: {x: 9.764227, y: 0.7478609, z: 1.1421076}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -213,7 +214,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -228,6 +229,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &5391685822361059764
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688136597766848213}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &2142418282354994272
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +260,7 @@ GameObject:
   - component: {fileID: 493759972640828867}
   - component: {fileID: 3448188295724962921}
   - component: {fileID: 204162018789789674}
+  - component: {fileID: 49513457464437556}
   m_Layer: 7
   m_Name: Piso (2)
   m_TagString: Untagged
@@ -256,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 2142418282354994272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 194.5, y: 7.4, z: 0}
+  m_LocalPosition: {x: 194.5, y: 11.18, z: 0}
   m_LocalScale: {x: 9.764227, y: 0.7478609, z: 1.1421076}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -350,7 +371,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -365,6 +386,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &49513457464437556
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142418282354994272}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &2236276698335746640
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +657,7 @@ Transform:
   m_GameObject: {fileID: 4632615012239131834}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 169.65, y: 13.37, z: 0}
+  m_LocalPosition: {x: 166.69, y: 19.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -635,6 +675,7 @@ GameObject:
   - component: {fileID: 5380314973163522626}
   - component: {fileID: 1354140501266566465}
   - component: {fileID: 2232817358970909833}
+  - component: {fileID: 2005734877978293555}
   m_Layer: 7
   m_Name: Piso (1)
   m_TagString: Untagged
@@ -651,7 +692,7 @@ Transform:
   m_GameObject: {fileID: 5550308376408819542}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 159.7, y: 3.49, z: 0}
+  m_LocalPosition: {x: 159.7, y: 6.58, z: 0}
   m_LocalScale: {x: 9.764227, y: 0.7478609, z: 1.1421076}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -745,7 +786,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -760,6 +801,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &2005734877978293555
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550308376408819542}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &6875967440306973124
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +969,7 @@ GameObject:
   - component: {fileID: 1831477229384750355}
   - component: {fileID: 8204183180326255437}
   - component: {fileID: 5405570175962725457}
+  - component: {fileID: 5225797897145713496}
   m_Layer: 7
   m_Name: Piso (3)
   m_TagString: Untagged
@@ -925,7 +986,7 @@ Transform:
   m_GameObject: {fileID: 7252569600750972269}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 170.2, y: 9.59, z: 0}
+  m_LocalPosition: {x: 167.24, y: 15.8, z: 0}
   m_LocalScale: {x: 9.764227, y: 0.7478609, z: 1.1421076}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1019,7 +1080,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -1034,6 +1095,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &5225797897145713496
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7252569600750972269}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &8683326907920167461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1126,7 @@ GameObject:
   - component: {fileID: 2572097913629597221}
   - component: {fileID: 5799771195050661449}
   - component: {fileID: 5728523586561583461}
+  - component: {fileID: 8766341756455155969}
   m_Layer: 7
   m_Name: Piso (5)
   m_TagString: Untagged
@@ -1062,7 +1143,7 @@ Transform:
   m_GameObject: {fileID: 8683326907920167461}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 185.1, y: 12.9, z: 0}
+  m_LocalPosition: {x: 183.47, y: 21.96, z: 0}
   m_LocalScale: {x: 9.764227, y: 0.7478609, z: 1.1421076}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1156,7 +1237,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -1171,3 +1252,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.99999994, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!251 &8766341756455155969
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683326907920167461}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
