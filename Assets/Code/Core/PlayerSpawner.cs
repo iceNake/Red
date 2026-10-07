@@ -38,16 +38,16 @@ public class PlayerSpawner : MonoBehaviour
     
     private void AssignPlayerToCamera(Transform playerTransform)
     {
-        CinemachineVirtualCamera vcam = Object.FindFirstObjectByType<CinemachineVirtualCamera>();
+        CinemachineCamera cam = Object.FindFirstObjectByType<CinemachineCamera>();
         
-        if (vcam != null)
+        if (cam != null)
         {
-            vcam.Follow = playerTransform;
-            vcam.LookAt = playerTransform; 
+            cam.Follow = playerTransform;
+            cam.LookAt = playerTransform; 
         }
         else
         {
-            Debug.LogWarning("[PlayerSpawner] No se encontró ninguna CinemachineVirtualCamera en la escena.");
+            Debug.LogWarning("[PlayerSpawner] No se encontró ninguna CinemachineCamera en la escena.");
         }
     }
 }
