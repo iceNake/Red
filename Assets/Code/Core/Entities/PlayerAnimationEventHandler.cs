@@ -31,6 +31,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         EnableTurn();
         EnableMove();
         DisableHitbox();
+        Debug.Log("<color=green>" + "otra bes normal");
     }
     public void DisableInterruption() 
     {
@@ -39,6 +40,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         DisableJump();
         DisableTurn();
         DisableMove();
+        Debug.Log("<color=blue>" + "tite");
     }
 
     

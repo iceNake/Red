@@ -218,10 +218,7 @@ public class Player : Entity
     {
         if (remainingJumps > 0)
         {
-            _rb.linearVelocity = new Vector2(
-                _rb.linearVelocity.x,
-                0
-            );
+           
 
             _rb.AddForce(
                 Vector2.up * jumpSpeed,

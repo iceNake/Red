@@ -25,12 +25,15 @@ public class PlayerHitBoxModifier : MonoBehaviour
         {
             _hitBox.offset = _selectedAttack.offSet * new Vector2(-1, 1);
             player.ApplyMomentum(_selectedAttack.momentumDirection * new Vector2(-1, 1), _selectedAttack.momentumForce);
+            Debug.Log("<color=orange>" + _selectedAttack.momentumDirection.x);
         }
         else
         {
             _hitBox.offset = _selectedAttack.offSet;
             player.ApplyMomentum(_selectedAttack.momentumDirection, _selectedAttack.momentumForce);
+            Debug.Log("<color=orange>" + _selectedAttack.momentumDirection.x);
         }
+        
         _hitBox.radius = _selectedAttack.radius;
         
         
