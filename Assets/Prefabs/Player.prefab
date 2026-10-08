@@ -436,7 +436,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -475,7 +475,7 @@ MonoBehaviour:
   walkSpeed: 8
   jumpSpeed: 20
   dashForce: 20
-  maxJumps: 2
+  maxJumps: 1
   isGrounded: 1
   raycastOrigin: {fileID: 3303929968779078122}
   raycastLength: 0.2
