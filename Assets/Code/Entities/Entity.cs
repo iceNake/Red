@@ -1,5 +1,6 @@
 using UnityEngine;
 using NaughtyAttributes;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Entity : MonoBehaviour, IDamageable
@@ -26,6 +27,7 @@ public class Entity : MonoBehaviour, IDamageable
 
 
     protected Rigidbody2D _rb;
+    protected SpriteRenderer _spriteRenderer;
 
     [SerializeField] private bool _isAlive = true;
 
@@ -64,6 +66,7 @@ public class Entity : MonoBehaviour, IDamageable
       
         _rb = GetComponent<Rigidbody2D>();
         _rb.freezeRotation = true;
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void Healing(float heal)
@@ -74,6 +77,10 @@ public class Entity : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
+        if (_spriteRenderer != null)
+        {
+            StartCoroutine(SpriteRed());
+        }
         _currentHealth -= damage;
         Debug.Log("Ouch! That hurt (Lost HP)");
 
@@ -89,6 +96,18 @@ public class Entity : MonoBehaviour, IDamageable
         _rb.AddForce(directionForKnockback * knockbackForce, ForceMode2D.Impulse);
 
         Debug.Log("<color=blue> Hey! You knocked the air out of me (Got knockback) </color>");
+    }
+
+    private IEnumerator SpriteRed()
+    {
+        _spriteRenderer.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f);
+        if( _spriteRenderer != null )
+        {
+            _spriteRenderer.color = Color.white;
+
+        }
     }
 
     public virtual void Die()

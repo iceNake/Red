@@ -12,4 +12,15 @@ public class BulkyData : ScriptableObject
     public float explosionRadius = 5f;
     public float attackCooldown = 3f;
     public LayerMask playerLayer;
+
+    [Header("Range")]
+    public float rangeDetection;
+    public float rangeAttack;
+
+    [Header("DamageAttack")]
+    public float percentageDamage = 8f;
+
+    [Header("Idle")]
+    public float idleWaitTime = 10f;
+    public float idleWalkTime = 3f;
 }
