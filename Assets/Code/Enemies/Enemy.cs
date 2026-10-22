@@ -35,14 +35,7 @@ public class Enemy : Entity
         _playerRef = FindFirstObjectByType<Player>(); 
         if (_playerRef == null) Debug.LogWarning($"Enemy " + gameObject.name + " no encontro a player");
     }
-    
-    private void OnDisable()
-    {
-        if(EnemyColliders.instance != null)
-        {
-            EnemyColliders.instance.ExitCombat(this);
-        }
-    }
+   
 
     protected virtual void Update()
     {
@@ -91,10 +84,8 @@ public class Enemy : Entity
         switch( _currentState )
         {
             case State.Chasing:
-                EnemyColliders.instance?.EnterCombat( this );
                 break;
             case State.Dead:
-                EnemyColliders.instance?.ExitCombat( this ); 
                 break;
         }
        
