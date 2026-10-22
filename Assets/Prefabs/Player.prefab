@@ -366,8 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3b56aa569034f4f875cd7372868e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _currentHealth: 10000
-  _maxHealth: 10000
+  _currentHealth: 50
+  _maxHealth: 50
   _currentSpeed: 8
   _maxSpeed: 10
   _currentDamage: 0
