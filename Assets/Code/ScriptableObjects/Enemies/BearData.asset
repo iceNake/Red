@@ -20,3 +20,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
+  rangeDetection: 15
+  rangeAttack: 5.5
+  percentageDamage: 8
+  idleWaitTime: 2
+  idleWalkTime: 3
