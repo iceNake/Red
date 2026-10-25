@@ -6,6 +6,9 @@ using System.Collections;
 public class Entity : MonoBehaviour, IDamageable
 {
     #region Variables
+    [SerializeField] private bool _isInHitstun;
+    [SerializeField] private Coroutine _hitstunCoroutine;
+    public bool IsInHitstun {get; private set;}
 
     #region Stats
     [SerializeField] private float _currentHealth;
@@ -108,6 +111,37 @@ public class Entity : MonoBehaviour, IDamageable
             _spriteRenderer.color = Color.white;
 
         }
+    }
+
+    public void ApplyHitstun(float duration)
+    {
+        if (!_isAlive) return;
+
+        if (this is Enemy enemy)
+        {
+            enemy.InterruptAction();
+        }
+
+        if (_hitstunCoroutine != null)
+        {
+            StopCoroutine(_hitstunCoroutine);
+        }
+        _hitstunCoroutine = StartCoroutine(HitstunCoroutine(duration));
+    }
+
+    IEnumerator HitstunCoroutine(float duration)
+    {
+        _isInHitstun = true;
+        yield return new WaitForSeconds(duration);
+
+        _isInHitstun = false;
+        _hitstunCoroutine = null;
+
+        if(this is Enemy enemy)
+        {
+            enemy.RecoverFromHitstun();
+        }
+
     }
 
     public virtual void Die()

@@ -35,11 +35,17 @@ public class Enemy : Entity
         _playerRef = FindFirstObjectByType<Player>(); 
         if (_playerRef == null) Debug.LogWarning($"Enemy " + gameObject.name + " no encontro a player");
     }
-   
+
 
     protected virtual void Update()
     {
-        if (!IsAlive || _playerRef == null || isStunned) return;
+        if (!IsAlive || _playerRef == null) return;
+
+        if (isStunned || IsInHitstun)
+        {
+            _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+            return;
+        }
         
         switch (_currentState)
         {
@@ -89,6 +95,15 @@ public class Enemy : Entity
                 break;
         }
        
+    }
+
+    public virtual void InterruptAction()
+    {
+        _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+    }
+    public virtual void RecoverFromHitstun()
+    {
+
     }
 
     public virtual void FlipTowardsPlayer(Vector2 leftKnockBack, Vector2 rightKnockBack)

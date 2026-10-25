@@ -127,7 +127,7 @@ public class Player : Entity
 
     private void Update()
     {
-        if (stunned)
+        if (IsInHitstun)
             return;
 
         InputRead();
@@ -199,6 +199,8 @@ public class Player : Entity
 
     private void ApplyMovement()
     {
+        if (IsInHitstun)
+            return;
         if (_isKnockedBack)
             return;
         if (isDashing)

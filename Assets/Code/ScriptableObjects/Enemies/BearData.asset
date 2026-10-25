@@ -25,3 +25,4 @@ MonoBehaviour:
   percentageDamage: 8
   idleWaitTime: 2
   idleWalkTime: 3
+  hitStunDuration: 2

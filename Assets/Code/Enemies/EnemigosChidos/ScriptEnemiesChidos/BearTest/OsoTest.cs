@@ -87,6 +87,13 @@ public class OsoTest : Bulky
 
     protected override void HandleChasing()
     {
+
+        if (IsInHitstun)
+        {
+            _rb.linearVelocity = new Vector2 (0f, _rb.linearVelocity.y);
+            return;
+        }
+
         base.HandleChasing();
 
         float distanceToPlayer = Vector2.Distance(transform.position, _playerRef.transform.position);
@@ -109,8 +116,17 @@ public class OsoTest : Bulky
         }
     } 
 
+    public float GetHitstunDuration()
+    {
+        return _bulkyData.hitStunDuration;
+    }
+
     public void StartAttack()
     {
+        if (IsInHitstun)
+        {
+            return;
+        }
         if (_slamPending)
         {
             _currentAttack = AttackType.Slam;
@@ -168,11 +184,13 @@ public class OsoTest : Bulky
 
     public void JabEnableHitbox()
     {
+        if (IsInHitstun) return;
         if (_currentAttack != AttackType.Jab) return;
         EnableHitbox();
     }
     public void JabDisableHitbox()
     {
+
         DisableHitbox();
     }
     public void JabEndAttack()
@@ -182,6 +200,7 @@ public class OsoTest : Bulky
 
     public void ShoveEnableHitbox()
     {
+        if (IsInHitstun) return;
         if (_currentAttack != AttackType.Shove) return;
         EnableHitbox();
     }
@@ -195,6 +214,7 @@ public class OsoTest : Bulky
     }
     public void SlamEnableHitbox()
     {
+        if (IsInHitstun) return;
         if (_currentAttack != AttackType.Slam) return;
         EnableHitbox();
     }
@@ -247,9 +267,32 @@ public class OsoTest : Bulky
     public void EndAttack()
     {
         DisableHitbox();
+        if (IsInHitstun) return;
         EnableMovement();
 
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
+        ChangeState(State.Chasing);
+
+        _animator.SetBool("Attacking", false);
+        _animator.SetBool("Chasing", true);
+    }
+
+    public override void InterruptAction()
+    {
+        DisableHitbox();
+        DisableMovement();
+
+        _animator.SetBool("Attacking", false);
+        _animator.SetBool("Chasing", false);
+        _animator.SetBool("Stunned", true);
+
+        ChangeState(State.Idle);
+    }
+    public override void RecoverFromHitstun()
+    {
+        _animator.SetBool("Stunned", false);
+        EnableMovement();
+
         ChangeState(State.Chasing);
 
         _animator.SetBool("Attacking", false);
