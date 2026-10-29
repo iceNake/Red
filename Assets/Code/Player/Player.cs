@@ -54,6 +54,8 @@ public class Player : Entity
     private bool _canTurn;
     private bool _canAttack;
     private bool _canDodge;
+    private bool _isKnockedBack;
+    private Coroutine _knockbackRoutine;
 
     private bool isDashing;
     private Vector2 _moveInput;
@@ -200,6 +202,8 @@ public class Player : Entity
 
     private void ApplyMovement()
     {
+        if (_isKnockedBack)
+            return;
         if (isDashing)
             return;
 
@@ -221,7 +225,8 @@ public class Player : Entity
     {
         if (remainingJumps > 0)
         {
-
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
+            
             _rb.AddForce(
                 Vector2.up * jumpSpeed,
                 ForceMode2D.Impulse
@@ -385,6 +390,24 @@ public class Player : Entity
         stunned = false;
 
         Debug.Log("Ya no estoy estuneado");
+    }
+
+    public override void TakeKnockback(Vector2 knockbackDirection, float knockbackForce)
+    {
+        if (_knockbackRoutine != null)
+            StopCoroutine( _knockbackRoutine );
+        _knockbackRoutine = StartCoroutine(KnockbackCoroutine(knockbackDirection, knockbackForce));
+    }
+
+    private IEnumerator KnockbackCoroutine(Vector2 direction,  float force)
+    {
+        _isKnockedBack = true;
+        _rb.linearVelocity = Vector2.zero;
+        _rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(0.25f);
+        _isKnockedBack = false;
+        _knockbackRoutine = null;
     }
 
     public void ChangeStateOnAnimationEvent(
