@@ -29,6 +29,8 @@ public class Player : Entity
     private static readonly int JumpHash = Animator.StringToHash("Jump");
     private static readonly int RedButtonHash = Animator.StringToHash("REDButton");
     private static readonly int DodgeHash = Animator.StringToHash("Dodge");
+    private static readonly int DeathHash = Animator.StringToHash("DEATH");
+    private static readonly int TakeDamageHash = Animator.StringToHash("TakeDamage");
 
     [Header("Input Settings")]
     public InputActionAsset actions;
@@ -164,8 +166,9 @@ public class Player : Entity
 
         isGrounded = hit.collider != null;
         if (isGrounded)
-            remainingJumps = maxJumps; 
-        
+        {
+            remainingJumps = maxJumps;
+        }
     }
 
     public void InputRead()
@@ -218,7 +221,6 @@ public class Player : Entity
     {
         if (remainingJumps > 0)
         {
-           
 
             _rb.AddForce(
                 Vector2.up * jumpSpeed,
@@ -350,11 +352,21 @@ public class Player : Entity
         }
     }
 
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        _animator.ResetTrigger(TakeDamageHash);
+        _animator.SetTrigger(TakeDamageHash);
+    }
+
     public override void Die()
     {
         base.Die();
 
         GameEvents.OnPlayerDied?.Invoke();
+
+        _animator.SetBool(DeathHash, true);
     }
 
     public void OnStun(float duration)
