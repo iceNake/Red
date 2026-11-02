@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ThiefData
   m_EditorClassIdentifier: Assembly-CSharp::GlassCannonData
   maxHealth: 30
-  damage: 50
-  moveSpeed: 7
+  damage: 4
+  moveSpeed: 5
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
-  attackCD: 2
+  attackCD: 4
   attackRange: 20

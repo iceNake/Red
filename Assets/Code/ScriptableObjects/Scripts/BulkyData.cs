@@ -23,4 +23,7 @@ public class BulkyData : ScriptableObject
     [Header("Idle")]
     public float idleWaitTime = 10f;
     public float idleWalkTime = 3f;
+
+    [Header("HitStun")]
+    public float hitStunDuration;
 }
