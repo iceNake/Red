@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d28d6cdc52bf640a87f75763fe7c1d, type: 3}
   m_Name: BearData
   m_EditorClassIdentifier: Assembly-CSharp::BulkyData
-  maxHealth: 100
-  damage: 20
+  maxHealth: 70
+  damage: 5
   moveSpeed: 5
   explosionRadius: 6.9
   attackCooldown: 3

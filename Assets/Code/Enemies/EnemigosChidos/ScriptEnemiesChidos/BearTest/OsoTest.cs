@@ -90,7 +90,7 @@ public class OsoTest : Bulky
 
         if (IsInHitstun)
         {
-            _rb.linearVelocity = new Vector2 (0f, _rb.linearVelocity.y);
+            //_rb.linearVelocity = new Vector2 (0f, _rb.linearVelocity.y);
             return;
         }
 
@@ -285,18 +285,16 @@ public class OsoTest : Bulky
         _animator.SetBool("Attacking", false);
         _animator.SetBool("Chasing", false);
         _animator.SetBool("Stunned", true);
-
-        ChangeState(State.Idle);
     }
     public override void RecoverFromHitstun()
     {
         _animator.SetBool("Stunned", false);
+        _animator.SetBool("Attacking", false);
+        _animator.SetBool("Chasing", true);
         EnableMovement();
 
         ChangeState(State.Chasing);
 
-        _animator.SetBool("Attacking", false);
-        _animator.SetBool("Chasing", true);
     }
 
     private IEnumerator IdleRoutine()

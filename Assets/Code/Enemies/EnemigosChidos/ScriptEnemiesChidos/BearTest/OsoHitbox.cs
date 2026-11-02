@@ -52,13 +52,13 @@ public class OsoHitbox : MonoBehaviour
         direction.y = 0.3f;
         direction.Normalize();
 
-        player.ApplyHitstun(_oso.GetHitstunDuration());
 
         player.TakeDamage(_oso.GetAttackDamage(player));
         _oso.OnAttackHit(player);
 
         if (_oso.IsSlamAttack())
         {
+            player.ApplyHitstun(_oso.GetHitstunDuration());
             player.TakeKnockback(direction, _knockbackForce);
 
         }

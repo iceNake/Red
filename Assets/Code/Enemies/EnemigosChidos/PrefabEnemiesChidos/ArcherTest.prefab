@@ -175,7 +175,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 2
@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932ee2c27c50d014e856466152bb3121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArqueroTest
+  _isInHitstun: 0
   _currentHealth: 100
   _maxHealth: 100
   _currentSpeed: 10

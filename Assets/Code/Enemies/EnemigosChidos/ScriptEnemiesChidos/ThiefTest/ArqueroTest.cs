@@ -116,6 +116,7 @@ public class ArqueroTest : GlassCannon
 
     public void HandlePositioning()
     {
+        if (IsInHitstun) return;
         float playerX = _playerRef.transform.position.x;
         float myX = transform.position.x;
 
@@ -166,6 +167,29 @@ public class ArqueroTest : GlassCannon
         yield return new WaitForSeconds(0.1f);
 
         _spriteRenderer.color = Color.white;
+    }
+
+    public override void RecoverFromHitstun()
+    {
+        _animator.SetBool("Stunned", false);
+        _animator.SetBool("Attacking", false);
+        _animator.SetBool("Chasing", true);
+
+        EnableMovement();
+
+        ChangeState(State.Chasing);
+        StartCoroutine(ShootRoutine());
+    }
+
+    public override void InterruptAction()
+    {
+        base.InterruptAction();
+
+        DisableMovement();
+
+        _animator.SetBool("Attacking", false);
+        _animator.SetBool("Chasing", false);
+        _animator.SetBool("Stunned", true);
     }
 
 
