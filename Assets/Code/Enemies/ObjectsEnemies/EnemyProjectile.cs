@@ -12,7 +12,7 @@ public class EnemyProjectile : MonoBehaviour
     public void Init(Vector2 dir, float dmg)
     {
         direction = dir;
-        damage = dmg;
+        damage = dmg; ;
 
         Destroy(gameObject, 4f);
     }
@@ -29,5 +29,7 @@ public class EnemyProjectile : MonoBehaviour
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
+        
+        Destroy(gameObject);
     }
 }
