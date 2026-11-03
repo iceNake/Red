@@ -142,14 +142,19 @@ public class ArqueroTest : GlassCannon
     public void Shoot()
     {
         if (_playerRef == null) return;
-
-        Vector2 direction = (_playerRef.transform.position - _shootPoint.position).normalized;
-
+        
+        float dirX = Mathf.Sign(_playerRef.transform.position.x - transform.position.x);
+        Vector2 horizontalDirection = new Vector2(dirX, 0f);
         GameObject projectile = Instantiate(_arrowPrefab, _shootPoint.position, Quaternion.identity);
 
         if (projectile.TryGetComponent<EnemyProjectile>(out EnemyProjectile proj))
         {
-            proj.Init(direction, CurrentDamage);
+            proj.Init(horizontalDirection, CurrentDamage);
+            
+            if (dirX < 0)
+                projectile.transform.localScale = new Vector3(-10f, 2f, 1f);
+            else
+                projectile.transform.localScale = new Vector3(10f, 2f, 1f);
         }
     }
 
@@ -192,17 +197,38 @@ public class ArqueroTest : GlassCannon
         _animator.SetBool("Stunned", true);
     }
 
+    private bool WatchingPlayer()
+    {
+        if (_playerRef == null) return false;
 
+        float distanceToPlayer = Vector2.Distance(_shootPoint.position, _playerRef.transform.position);
+        Vector2 directionToPlayer = (_playerRef.transform.position - _shootPoint.position).normalized;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(_shootPoint.position, directionToPlayer, distanceToPlayer);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.gameObject == this.gameObject) continue;
+
+            if (hit.collider.GetComponent<Player>() != null) return true; 
+            
+            return false; 
+        }
+        
+        return false;
+    }
 
     private IEnumerator ShootRoutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(_glassCannonData.attackCD);
-            ChangeState(State.Attacking);
-            _animator.SetBool("Attacking", true);
-            _animator.SetBool("Chasing", false);
 
+            if (WatchingPlayer())
+            {
+                ChangeState(State.Attacking);
+                _animator.SetBool("Attacking", true);
+                _animator.SetBool("Chasing", false);
+            }
         }
     }
 }
