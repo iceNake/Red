@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BearData
   m_EditorClassIdentifier: Assembly-CSharp::BulkyData
   maxHealth: 70
-  damage: 5
+  damage: 7
   moveSpeed: 5
   explosionRadius: 6.9
   attackCooldown: 3
@@ -25,4 +25,4 @@ MonoBehaviour:
   percentageDamage: 8
   idleWaitTime: 2
   idleWalkTime: 3
-  hitStunDuration: 2
+  hitStunDuration: 3
