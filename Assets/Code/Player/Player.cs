@@ -372,6 +372,7 @@ public class Player : Entity
         base.Die();
 
         GameEvents.OnPlayerDied?.Invoke();
+        this.gameObject.SetActive(true);
 
         _animator.SetBool(DeathHash, true);
     }
