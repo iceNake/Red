@@ -23,6 +23,9 @@ public class ArqueroTest : GlassCannon
     [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
 
     private bool _canMove = true;
+    
+    private Coroutine _shootCoroutine;
+    private Coroutine _colorCoroutine;
 
     protected override void Awake()
     {
@@ -65,7 +68,10 @@ public class ArqueroTest : GlassCannon
             _animator.SetBool("Chasing", true);
             ChangeState(State.Chasing);
             _animator.SetBool("Attacking", false);
-            StartCoroutine(ShootRoutine());
+            
+            if (_shootCoroutine != null) StopCoroutine(_shootCoroutine);
+            
+            _shootCoroutine = StartCoroutine(ShootRoutine());
         }
     }
 
@@ -91,6 +97,8 @@ public class ArqueroTest : GlassCannon
     public void MoveTowardsPlayer()
     {
         if (!_canMove || isStunned) return;
+        
+        LookAtPlayer();
         float direction = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
         _rb.linearVelocity = new Vector2(direction * CurrentSpeed, _rb.linearVelocity.y);
     }
@@ -117,6 +125,8 @@ public class ArqueroTest : GlassCannon
     public void HandlePositioning()
     {
         if (IsInHitstun) return;
+        
+        LookAtPlayer();
         float playerX = _playerRef.transform.position.x;
         float myX = transform.position.x;
 
@@ -143,6 +153,7 @@ public class ArqueroTest : GlassCannon
     {
         if (_playerRef == null) return;
         
+        LookAtPlayer();
         float dirX = Mathf.Sign(_playerRef.transform.position.x - transform.position.x);
         Vector2 horizontalDirection = new Vector2(dirX, 0f);
         GameObject projectile = Instantiate(_arrowPrefab, _shootPoint.position, Quaternion.identity);
@@ -161,7 +172,9 @@ public class ArqueroTest : GlassCannon
 
     public override void TakeDamage(float damage)
     {
-        StartCoroutine(SpriteRed());
+        if (_colorCoroutine != null) StopCoroutine(_colorCoroutine);
+        
+        _colorCoroutine = StartCoroutine(SpriteRed());
         base.TakeDamage(damage);
     }
 
@@ -172,6 +185,7 @@ public class ArqueroTest : GlassCannon
         yield return new WaitForSeconds(0.1f);
 
         _spriteRenderer.color = Color.white;
+        _colorCoroutine = null;
     }
 
     public override void RecoverFromHitstun()
@@ -183,7 +197,10 @@ public class ArqueroTest : GlassCannon
         EnableMovement();
 
         ChangeState(State.Chasing);
-        StartCoroutine(ShootRoutine());
+        
+        if (_shootCoroutine != null) StopCoroutine(_shootCoroutine);
+        
+        _shootCoroutine = StartCoroutine(ShootRoutine());
     }
 
     public override void InterruptAction()
@@ -191,6 +208,12 @@ public class ArqueroTest : GlassCannon
         base.InterruptAction();
 
         DisableMovement();
+        
+        if (_shootCoroutine != null)
+        {
+            StopCoroutine(_shootCoroutine);
+            _shootCoroutine = null;
+        }
 
         _animator.SetBool("Attacking", false);
         _animator.SetBool("Chasing", false);
@@ -201,14 +224,14 @@ public class ArqueroTest : GlassCannon
     {
         if (_playerRef == null) return false;
 
-        float distanceToPlayer = Vector2.Distance(_shootPoint.position, _playerRef.transform.position);
-        Vector2 directionToPlayer = (_playerRef.transform.position - _shootPoint.position).normalized;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(_shootPoint.position, directionToPlayer, distanceToPlayer);
+        float dirX = Mathf.Sign(_playerRef.transform.position.x - transform.position.x);
+        Vector2 horizontalDirection = new Vector2(dirX, 0f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(_shootPoint.position, horizontalDirection, _glassCannonData.attackRange);
 
         foreach (RaycastHit2D hit in hits)
         {
             if (hit.collider.gameObject == this.gameObject) continue;
-
+            
             if (hit.collider.GetComponent<Player>() != null) return true; 
             
             return false; 
@@ -230,5 +253,17 @@ public class ArqueroTest : GlassCannon
                 _animator.SetBool("Chasing", false);
             }
         }
+    }
+
+    private void LookAtPlayer()
+    {
+        if (_playerRef == null) return;
+        
+        float dirX = Mathf.Sign(_playerRef.transform.position.x - transform.position.x);
+        
+        if (dirX > 0f)
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        else if (dirX < 0f)
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
     }
 }

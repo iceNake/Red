@@ -42,11 +42,13 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnRequestLevelGeneration += LevelGeneration;
+        GameEvents.OnPlayerDied += HandleDespawnEnemies;
     }
 
     private void OnDisable()
     {
         GameEvents.OnRequestLevelGeneration -= LevelGeneration;
+        GameEvents.OnPlayerDied -= HandleDespawnEnemies;
     }
     
     /// <summary>
@@ -199,6 +201,24 @@ public class LevelManager : MonoBehaviour
         enemyInstance.transform.position = spawnPoint.position;
         enemyInstance.transform.rotation = spawnPoint.rotation;
         activeEnemies.Add(enemyInstance);
+    }
+
+    private void HandleDespawnEnemies()
+    {
+        for (int i = 0; i < activeEnemies.Count; i++)
+        {
+            foreach (var kvp in enemyPools)
+            {
+                if (activeEnemies[i].name.Contains(kvp.Key.name))
+                {
+                    kvp.Value.Release(activeEnemies[i]);
+                    break;
+                }
+            }
+        }
+        activeEnemies.Clear();
+        
+        _spawnPoints.Clear();
     }
     
     /*public void SpawnEnemy(GameObject enemy, Transform spawnPoint)
