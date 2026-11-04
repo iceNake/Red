@@ -97,6 +97,8 @@ public class ArqueroTest : GlassCannon
     public void MoveTowardsPlayer()
     {
         if (!_canMove || isStunned) return;
+        
+        LookAtPlayer();
         float direction = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
         _rb.linearVelocity = new Vector2(direction * CurrentSpeed, _rb.linearVelocity.y);
     }
@@ -123,6 +125,8 @@ public class ArqueroTest : GlassCannon
     public void HandlePositioning()
     {
         if (IsInHitstun) return;
+        
+        LookAtPlayer();
         float playerX = _playerRef.transform.position.x;
         float myX = transform.position.x;
 
@@ -149,6 +153,7 @@ public class ArqueroTest : GlassCannon
     {
         if (_playerRef == null) return;
         
+        LookAtPlayer();
         float dirX = Mathf.Sign(_playerRef.transform.position.x - transform.position.x);
         Vector2 horizontalDirection = new Vector2(dirX, 0f);
         GameObject projectile = Instantiate(_arrowPrefab, _shootPoint.position, Quaternion.identity);
@@ -248,5 +253,17 @@ public class ArqueroTest : GlassCannon
                 _animator.SetBool("Chasing", false);
             }
         }
+    }
+
+    private void LookAtPlayer()
+    {
+        if (_playerRef == null) return;
+        
+        float dirX = Mathf.Sign(_playerRef.transform.position.x - transform.position.x);
+        
+        if (dirX > 0f)
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        else if (dirX < 0f)
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
     }
 }
