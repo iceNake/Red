@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc29e774e243a254abdbfdd0b1e4a9a9, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp::ScenarioData
+  levelSequence:
+  - type: 0
+    isRequired: 1
+    fixedPrefab: {fileID: 257498154865536231, guid: cd9a35d43c0cbae41b2035e02f93bbab, type: 3}
+  - type: 6
+    isRequired: 1
+    fixedPrefab: {fileID: 257498154865536231, guid: 40edebb3100a246459400ebb8d29f69d, type: 3}
+  - type: 1
+    isRequired: 1
+    fixedPrefab: {fileID: 3369868203514363026, guid: 2c932a6acaf9c684c992372cbc5f9a45, type: 3}
+  - type: 1
+    isRequired: 1
+    fixedPrefab: {fileID: 3369868203514363026, guid: baa77133a18ebcf4ba65cf9084dc14fd, type: 3}
+  - type: 1
+    isRequired: 1
+    fixedPrefab: {fileID: 3369868203514363026, guid: 63dc77d212cb0bb46a934f7b60e03745, type: 3}
+  - type: 1
+    isRequired: 1
+    fixedPrefab: {fileID: 3369868203514363026, guid: 9fb3e85b5292cd64bb5963e9f1877eeb, type: 3}
+  combatRoomsPool: []
+  eventRoomsPool: []
+  defaultRoomsPool: []
