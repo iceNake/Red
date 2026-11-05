@@ -267,7 +267,7 @@ public class OsoTest : Bulky
     public void EndAttack()
     {
         DisableHitbox();
-        if (IsInHitstun) return;
+        if (IsInHitstun || isStunned) return;
         EnableMovement();
 
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
@@ -280,7 +280,12 @@ public class OsoTest : Bulky
     public override void InterruptAction()
     {
         DisableHitbox();
-        DisableMovement();
+
+        _canMove = false;
+
+        _attackHit = false;
+
+        
 
         _animator.SetBool("Attacking", false);
         _animator.SetBool("Chasing", false);
