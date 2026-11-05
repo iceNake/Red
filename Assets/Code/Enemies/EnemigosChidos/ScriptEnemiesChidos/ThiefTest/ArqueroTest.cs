@@ -22,6 +22,9 @@ public class ArqueroTest : GlassCannon
     [SerializeField] private Vector2 leftKnockBack = new Vector2(-1, 0f);
     [SerializeField] private Vector2 rightKnockBack = new Vector2(1, 0f);
 
+    [Header("Personal Space")]
+    [SerializeField] private float _personalSpace = 1.5f;
+
     private bool _canMove = true;
     
     private Coroutine _shootCoroutine;
@@ -99,8 +102,15 @@ public class ArqueroTest : GlassCannon
         if (!_canMove || isStunned) return;
         
         LookAtPlayer();
-        float direction = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
-        _rb.linearVelocity = new Vector2(direction * CurrentSpeed, _rb.linearVelocity.y);
+        float dirToPlayer = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
+
+        if (IsArcheryInFront(dirToPlayer))
+        {
+            _rb.linearVelocity = new Vector2(-dirToPlayer * (CurrentSpeed * 0.5f), _rb.linearVelocity.y);
+            return;
+        }
+        
+        _rb.linearVelocity = new Vector2(dirToPlayer * CurrentSpeed, _rb.linearVelocity.y);
     }
 
     public void DisableMovement()
@@ -135,7 +145,11 @@ public class ArqueroTest : GlassCannon
 
         float error = distance - _glassCannonData.attackRange;
 
-
+        if (IsArcheryInFront(dirToPlayer))
+        {
+            _rb.linearVelocity = new Vector2(-dirToPlayer * (CurrentSpeed * 0.5f), _rb.linearVelocity.y);
+            return;
+        }
 
         if (Mathf.Abs(error) > _positionTolerance)
         {
@@ -231,6 +245,8 @@ public class ArqueroTest : GlassCannon
         foreach (RaycastHit2D hit in hits)
         {
             if (hit.collider.gameObject == this.gameObject) continue;
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")) continue;
             
             if (hit.collider.GetComponent<Player>() != null) return true; 
             
@@ -265,5 +281,20 @@ public class ArqueroTest : GlassCannon
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
         else if (dirX < 0f)
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
+    }
+
+    private bool IsArcheryInFront(float dirX)
+    {
+        Vector2 direction = new Vector2(dirX, 0f);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, _personalSpace);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.gameObject == this.gameObject) continue;
+            
+            if (hit.collider.GetComponent<ArqueroTest>() != null) return true;
+        }
+        
+        return false;
     }
 }
