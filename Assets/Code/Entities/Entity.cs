@@ -1,6 +1,7 @@
-using UnityEngine;
 using NaughtyAttributes;
+using System;
 using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Entity : MonoBehaviour, IDamageable
@@ -27,6 +28,10 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] private float _damageTest;
     public bool isPlayerFlipped;
     #endregion
+
+    [Header("Collision Detection")]
+    public bool invulnerable = false;
+
 
 
     protected Rigidbody2D _rb;
@@ -56,8 +61,11 @@ public class Entity : MonoBehaviour, IDamageable
     [Button]
     public void TakeDamageAndKnockBackTest()
     {
-        TakeDamage(_damageTest);
-        TakeKnockback(_knockbackDirectionTest, _knockbackForceTest);
+        if(!invulnerable)
+        {
+            TakeDamage(_damageTest);
+            TakeKnockback(_knockbackDirectionTest, _knockbackForceTest);
+        }  
     }
 
     #endregion
@@ -80,53 +88,69 @@ public class Entity : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
-        if (_spriteRenderer != null)
+        if(!invulnerable)
         {
-            StartCoroutine(SpriteRed());
-        }
-        _currentHealth -= damage;
-        Debug.Log("Ouch! That hurt (Lost HP)");
+            if (_spriteRenderer != null)
+            {
+                StartCoroutine(SpriteRed());
+            }
+            _currentHealth -= damage;
+            Debug.Log("Ouch! That hurt (Lost HP)");
 
-        if (_currentHealth <= 0)
-            Die();
+            if (_currentHealth <= 0)
+                Die();
+        }
+        
     }
 
     public virtual void TakeKnockback(Vector2 knockbackDirection, float knockbackForce)
     {
-        Vector2 directionForKnockback = knockbackDirection.normalized;
+        if (!invulnerable)
+        {
+            Vector2 directionForKnockback = knockbackDirection.normalized;
 
-        _rb.linearVelocity = Vector2.zero;
-        _rb.AddForce(directionForKnockback * knockbackForce, ForceMode2D.Impulse);
+            _rb.linearVelocity = Vector2.zero;
+            _rb.AddForce(directionForKnockback * knockbackForce, ForceMode2D.Impulse);
 
-        Debug.Log("<color=blue> Hey! You knocked the air out of me (Got knockback) </color>");
+            Debug.Log("<color=blue> Hey! You knocked the air out of me (Got knockback) </color>");
+        }
+            
     }
 
     private IEnumerator SpriteRed()
     {
-        _spriteRenderer.color = Color.red;
-
-        yield return new WaitForSeconds(0.1f);
-        if( _spriteRenderer != null )
+        if(!invulnerable)
         {
-            _spriteRenderer.color = Color.white;
+            _spriteRenderer.color = Color.red;
 
+            yield return new WaitForSeconds(0.1f);
+            if (_spriteRenderer != null)
+            {
+                _spriteRenderer.color = Color.white;
+
+            }
         }
+        
     }
 
     public void ApplyHitstun(float duration)
     {
-        if (!_isAlive) return;
-
-        if (this is Enemy enemy)
+        if(!invulnerable)
         {
-            enemy.InterruptAction();
-        }
+            if (!_isAlive) return;
 
-        if (_hitstunCoroutine != null)
-        {
-            StopCoroutine(_hitstunCoroutine);
+            if (this is Enemy enemy)
+            {
+                enemy.InterruptAction();
+            }
+
+            if (_hitstunCoroutine != null)
+            {
+                StopCoroutine(_hitstunCoroutine);
+            }
+            _hitstunCoroutine = StartCoroutine(HitstunCoroutine(duration));
         }
-        _hitstunCoroutine = StartCoroutine(HitstunCoroutine(duration));
+        
     }
 
     IEnumerator HitstunCoroutine(float duration)
@@ -151,6 +175,13 @@ public class Entity : MonoBehaviour, IDamageable
         _isAlive = false;
         gameObject.SetActive(false);
         Debug.Log("My story shouldn't end like this (Died)");
+    }
+
+    public IEnumerator IFrames(float duration)
+    {
+        invulnerable = true;
+        yield return new WaitForSeconds(duration);
+        invulnerable = false;
     }
 
     #endregion

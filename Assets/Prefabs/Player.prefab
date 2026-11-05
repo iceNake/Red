@@ -377,11 +377,13 @@ MonoBehaviour:
   _knockbackForceTest: 0
   _damageTest: 0
   isPlayerFlipped: 0
+  invulnerable: 0
   _isAlive: 1
   actions: {fileID: -944628639613478452, guid: 188fa70217d40f940984bffb91396a95, type: 3}
   walkSpeed: 8
   jumpSpeed: 20
   dashForce: 20
+  dashDuration: 1.2
   maxJumps: 1
   isGrounded: 1
   raycastOrigin: {fileID: 3303929968779078122}
