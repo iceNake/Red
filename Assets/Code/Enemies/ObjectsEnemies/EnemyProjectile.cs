@@ -26,10 +26,14 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out  Player player))
         {
+            if (player.invulnerable) return;
+            
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
-        
-        Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
