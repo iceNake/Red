@@ -44,6 +44,7 @@ public class ArqueroTest : GlassCannon
 
     protected override void HandleCustom()
     {
+        if (!_canMove || isStunned || IsInHitstun) return;
         switch (_subState)
         {
             case SubState.Positioning:
@@ -80,6 +81,7 @@ public class ArqueroTest : GlassCannon
 
     protected override void HandleChasing()
     {
+        if (IsInHitstun) return;
         base.HandleChasing();
         float distanceToPlayer = Vector2.Distance(transform.position, _playerRef.transform.position);
 
@@ -99,7 +101,7 @@ public class ArqueroTest : GlassCannon
 
     public void MoveTowardsPlayer()
     {
-        if (!_canMove || isStunned) return;
+        if (!_canMove || isStunned || IsInHitstun) return;
         
         LookAtPlayer();
         float dirToPlayer = (_playerRef.transform.position.x > transform.position.x) ? 1 : -1;
@@ -126,6 +128,7 @@ public class ArqueroTest : GlassCannon
 
     public void EndAttack()
     {
+        if (IsInHitstun || isStunned) return;
         EnableMovement();
         _animator.SetBool("Attacking", false);
         _animator.SetBool("Chasing", true);
@@ -134,7 +137,7 @@ public class ArqueroTest : GlassCannon
 
     public void HandlePositioning()
     {
-        if (IsInHitstun) return;
+        if (!_canMove || IsInHitstun || isStunned) return;
         
         LookAtPlayer();
         float playerX = _playerRef.transform.position.x;
@@ -207,7 +210,7 @@ public class ArqueroTest : GlassCannon
         _animator.SetBool("Stunned", false);
         _animator.SetBool("Attacking", false);
         _animator.SetBool("Chasing", true);
-
+        _canMove = true;
         EnableMovement();
 
         ChangeState(State.Chasing);
@@ -219,9 +222,12 @@ public class ArqueroTest : GlassCannon
 
     public override void InterruptAction()
     {
-        base.InterruptAction();
+        //base.InterruptAction();
 
-        DisableMovement();
+        //DisableMovement();
+        _canMove = false;
+        
+        _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
         
         if (_shootCoroutine != null)
         {

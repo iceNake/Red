@@ -285,6 +285,10 @@ public class OsoTest : Bulky
 
         _attackHit = false;
 
+        _rb.linearVelocity = new Vector2(0f, _rb.linearVelocity.y);
+
+        StopIdleRoutine();
+
         
 
         _animator.SetBool("Attacking", false);
@@ -296,6 +300,7 @@ public class OsoTest : Bulky
         _animator.SetBool("Stunned", false);
         _animator.SetBool("Attacking", false);
         _animator.SetBool("Chasing", true);
+        _canMove = true;
         EnableMovement();
 
         ChangeState(State.Chasing);
