@@ -30,7 +30,7 @@ AnimationClip:
       value: {fileID: 21300000, guid: d7fb97d8cf090f647a778ce338ab8ab9, type: 3}
     - time: 0.36666667
       value: {fileID: 21300000, guid: 5abda1b505e68d045bfacd1fd50e14fc, type: 3}
-    - time: 0.46666667
+    - time: 0.43333334
       value: {fileID: 21300000, guid: 04accd89850689443bb56569a255a5ca, type: 3}
     - time: 0.53333336
       value: {fileID: 21300000, guid: c2aae6b320736ba49ad9afa392a0085f, type: 3}
@@ -111,8 +111,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.53333336
-    functionName: ReturnToNormal
+  - time: 0.46666667
+    functionName: DisableHitbox
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: EnableInterruptables
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

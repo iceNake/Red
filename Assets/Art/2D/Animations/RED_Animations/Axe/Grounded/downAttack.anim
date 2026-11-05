@@ -154,7 +154,7 @@ AnimationClip:
     intParameter: 4
     messageOptions: 0
   - time: 1.2666667
-    functionName: ReturnToNormal
+    functionName: EnableInterruptables
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

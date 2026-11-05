@@ -138,8 +138,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 1.0333333
-    functionName: ReturnToNormal
+  - time: 0.76666665
+    functionName: DisableHitbox
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1666666
+    functionName: EnableInterruptables
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -25,13 +25,17 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
 
     public void ReturnToNormal()
     {
+        EnableTurn();
+        EnableMove();
+        EnableInterruptables();
+        Debug.Log("<color=green>" + "otra bes normal");
+    }
+    public void EnableInterruptables()
+    {
+        DisableHitbox();
         EnableAttack();
         EnableDodge();
         EnableJump();
-        EnableTurn();
-        EnableMove();
-        DisableHitbox();
-        Debug.Log("<color=green>" + "otra bes normal");
     }
     public void DisableInterruption() 
     {
