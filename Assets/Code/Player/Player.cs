@@ -1,6 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public enum AttackDirection
 {
@@ -45,6 +46,7 @@ public class Player : Entity
     public float walkSpeed = 8f;
     public float jumpSpeed = 12f;
     public float dashForce = 20f;
+    public float dashDuration = 1f;
     public int maxJumps;
 
     private bool stunned;
@@ -74,6 +76,8 @@ public class Player : Entity
 
     [Header("Attack System")]
     public PlayerHitBoxModifier playerHitBoxModifier;
+
+    
 
     private Animator _animator;
 
@@ -244,7 +248,6 @@ public class Player : Entity
         if (Mathf.Abs(_moveInput.x) > 0.1f)
         {
             isDashing = true;
-
             float dashDirection = Mathf.Sign(_moveInput.x);
 
             _rb.linearVelocity = new Vector2(
@@ -254,10 +257,14 @@ public class Player : Entity
 
             Invoke(nameof(EndDash), 0.2f);
         }
+        //Coroutine in Entity
+        StartCoroutine(IFrames(dashDuration));
 
         _animator.ResetTrigger(DodgeHash);
         _animator.SetTrigger(DodgeHash);
     }
+
+    
 
     private void EndDash()
     {
@@ -361,10 +368,14 @@ public class Player : Entity
 
     public override void TakeDamage(float damage)
     {
-        base.TakeDamage(damage);
-
-        _animator.ResetTrigger(TakeDamageHash);
-        _animator.SetTrigger(TakeDamageHash);
+        
+        if(!invulnerable)
+        {
+            base.TakeDamage(damage);
+            _animator.ResetTrigger(TakeDamageHash);
+            _animator.SetTrigger(TakeDamageHash);
+        }
+           
     }
 
     public override void Die()
