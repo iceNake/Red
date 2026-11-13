@@ -14,4 +14,8 @@ public static class GameEvents
     //LEVELS
     public static Action OnLevelGenerated;
     public static Action OnRequestLevelGeneration;
+    
+    // Local Rooms
+    public static Action<int> OnRoomRewardCollected;
+    public static Action OnEnemyDied;
 }
