@@ -91,6 +91,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1083755963955269169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4105751720256495571}
+  m_Layer: 0
+  m_Name: RewardSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4105751720256495571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083755963955269169}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 191.2, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4883392408058452313}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3369868203514363026
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4883392408058452313}
   - component: {fileID: 1875881903919605912}
-  - component: {fileID: 4807927226283913385}
+  - component: {fileID: 2772439149094505056}
   m_Layer: 0
   m_Name: Level_Combat 7
   m_TagString: Untagged
@@ -131,6 +162,7 @@ Transform:
   - {fileID: 1799690217896487381}
   - {fileID: 4094946213335163797}
   - {fileID: 3856533529860684495}
+  - {fileID: 4105751720256495571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1875881903919605912
@@ -147,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomConnector
   entrance: {fileID: 7158432781201761084}
   exit: {fileID: 8842356508868749027}
---- !u!114 &4807927226283913385
+--- !u!114 &2772439149094505056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,12 +188,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3369868203514363026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc44d2b3991dc4748babbe21c7892683, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e1bb0428eb935b43a15f30907b524a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySapwnPointsContainer
-  _enemyLevelspawnPoints:
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManager
+  roomID: 0
+  _roomBudget: 0
+  _enemyBundle: {fileID: 11400000, guid: 19fdf16dd6ad17a4e8b0309e71727941, type: 2}
+  enemyLevelSpawnPoints:
   - {fileID: 4094946213335163797}
   - {fileID: 3856533529860684495}
+  _rewardSpawnPoint: {fileID: 4105751720256495571}
+  _rewardPrefab: {fileID: 5920798940390672965, guid: 056456888d1f4864e97320a8fcd148c8, type: 3}
 --- !u!1 &4598456002639362203
 GameObject:
   m_ObjectHideFlags: 0

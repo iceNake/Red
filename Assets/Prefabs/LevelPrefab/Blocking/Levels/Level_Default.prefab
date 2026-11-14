@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4425214265084964275}
   - component: {fileID: 3526067079538965181}
+  - component: {fileID: 2987118384613161157}
   m_Layer: 0
   m_Name: Level_Default
   m_TagString: Untagged
@@ -50,6 +51,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomConnector
   entrance: {fileID: 8953704039143142121}
   exit: {fileID: 6663224865769628536}
+--- !u!114 &2987118384613161157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257498154865536231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1bb0428eb935b43a15f30907b524a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManager
+  roomID: 0
+  _roomBudget: 0
+  _enemyBundle: {fileID: 0}
+  enemyLevelSpawnPoints: []
+  _rewardSpawnPoint: {fileID: 0}
+  _rewardPrefab: {fileID: 0}
 --- !u!1 &3816814639579918189
 GameObject:
   m_ObjectHideFlags: 0
