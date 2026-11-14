@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   roomID: 0
-  _roomBudget: 0
+  _roomBudget: 20
   _enemyBundle: {fileID: 11400000, guid: 19fdf16dd6ad17a4e8b0309e71727941, type: 2}
   enemyLevelSpawnPoints:
   - {fileID: 4094946213335163797}

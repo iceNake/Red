@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4425214265084964275}
   - component: {fileID: 3526067079538965181}
-  - component: {fileID: 1996048044188640717}
+  - component: {fileID: 325704271644128925}
   m_Layer: 0
   m_Name: Level_Event
   m_TagString: Untagged
@@ -49,6 +49,7 @@ Transform:
   - {fileID: 1559869541835702230}
   - {fileID: 2384341867143452410}
   - {fileID: 176810914615856261}
+  - {fileID: 8188252724000362198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3526067079538965181
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomConnector
   entrance: {fileID: 8953704039143142121}
   exit: {fileID: 6663224865769628536}
---- !u!114 &1996048044188640717
+--- !u!114 &325704271644128925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,15 +75,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 257498154865536231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc44d2b3991dc4748babbe21c7892683, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e1bb0428eb935b43a15f30907b524a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawnPointsContainer
-  _enemyLevelspawnPoints:
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManager
+  roomID: 0
+  _roomBudget: 0
+  _enemyBundle: {fileID: 11400000, guid: 19fdf16dd6ad17a4e8b0309e71727941, type: 2}
+  enemyLevelSpawnPoints:
   - {fileID: 4283034830822726705}
   - {fileID: 6640931679489275478}
   - {fileID: 7647430223973316166}
   - {fileID: 8726973493586823421}
   - {fileID: 3397353718638009950}
+  _rewardSpawnPoint: {fileID: 8188252724000362198}
+  _rewardPrefab: {fileID: 5920798940390672965, guid: 056456888d1f4864e97320a8fcd148c8, type: 3}
 --- !u!1 &403798929425086495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,3 +2208,34 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!1 &8981828057616961947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8188252724000362198}
+  m_Layer: 0
+  m_Name: RewardSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8188252724000362198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8981828057616961947}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -56.9, y: 23.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4425214265084964275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
