@@ -100,6 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4425214265084964275}
   - component: {fileID: 3526067079538965181}
+  - component: {fileID: 8608245650607841349}
   m_Layer: 0
   m_Name: Level_Default 1
   m_TagString: Untagged
@@ -130,6 +131,7 @@ Transform:
   - {fileID: 908359647060214992}
   - {fileID: 501365181569295647}
   - {fileID: 6921420725689289275}
+  - {fileID: 5830056599945524061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3526067079538965181
@@ -146,6 +148,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomConnector
   entrance: {fileID: 8953704039143142121}
   exit: {fileID: 6663224865769628536}
+--- !u!114 &8608245650607841349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257498154865536231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1bb0428eb935b43a15f30907b524a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManager
+  roomID: 0
+  _roomBudget: 0
+  _enemyBundle: {fileID: 0}
+  enemyLevelSpawnPoints: []
+  _rewardSpawnPoint: {fileID: 5830056599945524061}
+  _rewardPrefab: {fileID: 5920798940390672965, guid: 056456888d1f4864e97320a8fcd148c8, type: 3}
 --- !u!1 &486263867730917698
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,6 +713,37 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1 &2310665540185801770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5830056599945524061}
+  m_Layer: 0
+  m_Name: RewardSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5830056599945524061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310665540185801770}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 41.7, y: 13.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4425214265084964275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2338386233507650966
 GameObject:
   m_ObjectHideFlags: 0

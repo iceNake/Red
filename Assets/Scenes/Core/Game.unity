@@ -3481,9 +3481,6 @@ MonoBehaviour:
   activeLevelContainer: {fileID: 1058143374}
   enemyPoolContainer: {fileID: 1457971425}
   activeEnemiesContainer: {fileID: 1901303356}
-  _enemyBundle: {fileID: 11400000, guid: 19fdf16dd6ad17a4e8b0309e71727941, type: 2}
-  _spawnPoints: []
-  _budget: 200
 --- !u!4 &1502524284
 Transform:
   m_ObjectHideFlags: 0

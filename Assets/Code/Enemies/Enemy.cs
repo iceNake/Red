@@ -160,5 +160,9 @@ public class Enemy : Entity
 
     }
 
-    
+    public override void Die()
+    {
+        base.Die();
+        GameEvents.OnEnemyDied?.Invoke();
+    }
 }
