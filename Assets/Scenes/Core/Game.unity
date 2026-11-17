@@ -3276,7 +3276,7 @@ GameObject:
   - component: {fileID: 1394873656}
   - component: {fileID: 1394873655}
   m_Layer: 7
-  m_Name: Cube (1)
+  m_Name: Piso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4237,7 +4237,7 @@ GameObject:
   - component: {fileID: 1872856928}
   - component: {fileID: 1872856932}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: DeadZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
