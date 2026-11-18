@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Tree : MonoBehaviour
+public class TreeDestroy : MonoBehaviour
 {
     [SerializeField] private int targetLayerIndex;
 
@@ -16,10 +16,7 @@ public class Tree : MonoBehaviour
         
         if (other.gameObject.layer == targetLayerIndex)
         {
-            if (hitbox != null)
-            {
-                gameObject.SetActive(false);
-            }
+            if (hitbox != null) gameObject.SetActive(false);
         }
     }
 }
