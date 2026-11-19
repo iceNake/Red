@@ -4,7 +4,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
 {
     private Player _player => (Player)animatedEntity;
 
-    
+
     public void EnableHitbox(int attackIndex)
     {
         Debug.Log($"Player encontrado: {_player}");
@@ -18,22 +18,26 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
 
         _player.playerHitBoxModifier.ActivateHitbox(attackIndex);
     }
-    public void DisableHitbox() 
+    public void DisableHitbox()
     {
         _player.playerHitBoxModifier.DeActivateHitbox();
     }
 
     public void ReturnToNormal()
     {
+        EnableTurn();
+        EnableMove();
+        EnableInterruptables();
+        Debug.Log("<color=green>" + "otra bes normal");
+    }
+    public void EnableInterruptables()
+    {
+        DisableHitbox();
         EnableAttack();
         EnableDodge();
         EnableJump();
-        EnableTurn();
-        EnableMove();
-        DisableHitbox();
-        Debug.Log("<color=green>" + "otra bes normal");
     }
-    public void DisableInterruption() 
+    public void DisableInterruption()
     {
         DisableAttack();
         DisableDodge();
@@ -43,7 +47,7 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         Debug.Log("<color=blue>" + "tite");
     }
 
-    
+
     private void EnableAttack()
     {
         _player.ChangeStateOnAnimationEvent(
@@ -124,4 +128,3 @@ public class PlayerAnimationEventHandler : AnimationEventHandler
         );
     }
 }
-
