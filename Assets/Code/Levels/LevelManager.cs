@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
     private List<GameObject> activeEnemies = new List<GameObject>();
     private Dictionary<GameObject, ObjectPool<GameObject>> roomPools = new Dictionary<GameObject, ObjectPool<GameObject>>();
     private List<GameObject> activeRooms = new List<GameObject>();
+    
+    private Dictionary<int, RoomManager> clusterLastRooms = new Dictionary<int, RoomManager>();
 
     private void OnEnable()
     {
@@ -42,7 +44,6 @@ public class LevelManager : MonoBehaviour
             levelGenerator.BuildRoute();
             
             await BuildLevelAsync(levelGenerator.finalMap);
-            
             await Awaitable.WaitForSecondsAsync(2.5f);
             
             GameEvents.OnLevelGenerated?.Invoke();
@@ -56,21 +57,22 @@ public class LevelManager : MonoBehaviour
     private async Awaitable BuildLevelAsync(List<GameObject> roomPrefabs)
     {
         Transform lastExit = startingPoint;
-        int currentRoomID = 0;
-
-        foreach (GameObject prefab in roomPrefabs)
+        clusterLastRooms.Clear();
+        
+        for (int i = 0; i < roomPrefabs.Count; i++)
         {
+            GameObject prefab = roomPrefabs[i];
             if (prefab == null) continue;
             
             GameObject roomInstance = GetRoomFromPool(prefab);
             roomInstance.transform.SetParent(activeLevelContainer);
             roomInstance.SetActive(true);
             activeRooms.Add(roomInstance);
-            RoomConnector connector = roomInstance.GetComponent<RoomConnector>();
             
+            RoomConnector connector = roomInstance.GetComponent<RoomConnector>();
             if (connector == null)
             {
-                Debug.LogError($" {prefab.name} no tiene el componente RoomConnector.");
+                Debug.LogError($"{prefab.name} no tiene el componente RoomConnector.");
                 continue;
             }
             
@@ -79,15 +81,63 @@ public class LevelManager : MonoBehaviour
             roomInstance.transform.position = targetPosition - entranceOffset;
             lastExit = connector.Exit;
 
-            RoomManager roomManager = roomInstance.GetComponent<RoomManager>();
-            
-            if (roomManager != null) roomManager.Init(currentRoomID, this);
-            
-            currentRoomID++;
-            
             await Awaitable.NextFrameAsync();
         }
+        
+        int currentClusterID = 0;
 
+        for (int i = 0; i < activeRooms.Count; i++)
+        {
+            RoomManager currentRM = activeRooms[i].GetComponent<RoomManager>();
+            CombatClusterTrigger trigger = activeRooms[i].GetComponentInChildren<CombatClusterTrigger>(true);
+
+            bool currentIsCombat = (currentRM != null && currentRM.isCombatRoom);
+
+            if (currentIsCombat)
+            {
+                bool prevIsCombat = (i > 0 && activeRooms[i - 1].GetComponent<RoomManager>() != null && activeRooms[i - 1].GetComponent<RoomManager>().isCombatRoom);
+                bool nextIsCombat = (i < activeRooms.Count - 1 && activeRooms[i + 1].GetComponent<RoomManager>() != null && activeRooms[i + 1].GetComponent<RoomManager>().isCombatRoom);
+                bool isFirst = !prevIsCombat;
+                bool isLast = !nextIsCombat;
+
+                currentRM.InitCombatRoom(currentClusterID, isFirst, isLast, this);
+
+                if (isLast)
+                {
+                    clusterLastRooms[currentClusterID] = currentRM;
+                    currentClusterID++;
+                }
+                
+                if (trigger != null) trigger.Setup(-1);
+            }
+            else
+            {
+                if (i < activeRooms.Count - 1)
+                {
+                    RoomManager nextRM = activeRooms[i + 1].GetComponent<RoomManager>();
+                    if (nextRM != null && nextRM.isCombatRoom)
+                    {
+                        if (trigger != null) trigger.Setup(currentClusterID);
+                    }
+                    else
+                    {
+                        if (trigger != null) trigger.Setup(-1);
+                    }
+                }
+                else
+                {
+                    if (trigger != null) trigger.Setup(-1);
+                }
+            }
+        }
+    }
+
+    public void RegisterEnemiesToCluster(int clusterID, int enemyCount)
+    {
+        if (clusterLastRooms.TryGetValue(clusterID, out RoomManager lastRoom))
+        {
+            lastRoom.AddEnemiesToClusterCount(enemyCount);
+        }
     }
 
     private GameObject GetRoomFromPool(GameObject prefab)
@@ -107,7 +157,6 @@ public class LevelManager : MonoBehaviour
                 maxSize: 50
             );
         }
-        
         return roomPools[prefab].Get();
     }
 

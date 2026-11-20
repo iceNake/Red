@@ -16,6 +16,7 @@ public static class GameEvents
     public static Action OnRequestLevelGeneration;
     
     // Local Rooms
+    public static Action<int> OnCombatClusterTriggered;
     public static Action<int> OnRoomRewardCollected;
     public static Action OnEnemyDied;
 }
