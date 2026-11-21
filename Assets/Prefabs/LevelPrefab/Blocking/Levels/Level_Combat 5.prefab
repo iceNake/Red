@@ -360,7 +360,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e1bb0428eb935b43a15f30907b524a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
-  roomID: 0
+  isCombatRoom: 1
+  clusterID: -1
+  isFirstInCluster: 0
+  isLastInCluster: 0
   _roomBudget: 30
   _enemyBundle: {fileID: 11400000, guid: 19fdf16dd6ad17a4e8b0309e71727941, type: 2}
   enemyLevelSpawnPoints:
@@ -368,6 +371,7 @@ MonoBehaviour:
   - {fileID: 3856533529860684495}
   - {fileID: 6034016316095934605}
   - {fileID: 4526257537823711094}
+  _wallPrefab: {fileID: 3132775378354344134, guid: 8dfa3b6118177f44e91b1cd708c1aaee, type: 3}
   _rewardSpawnPoint: {fileID: 3164423956444313835}
   _rewardPrefab: {fileID: 5920798940390672965, guid: 056456888d1f4864e97320a8fcd148c8, type: 3}
 --- !u!1 &4598456002639362203
