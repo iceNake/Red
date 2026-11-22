@@ -30,6 +30,9 @@ public class RoomManager : MonoBehaviour
     private int _totalClusterEnemiesAlive;
     private bool _isClusterActive = false;
     private bool _isClusterCleared = false;
+    
+    public Vector3 GetEntrancePosition() => _roomConnector != null && _roomConnector.Entrance != null ? _roomConnector.Entrance.position : transform.position;
+    public Vector3 GetExitPosition() => _roomConnector != null && _roomConnector.Exit != null ? _roomConnector.Exit.position : transform.position;
 
     private void Awake()
     {

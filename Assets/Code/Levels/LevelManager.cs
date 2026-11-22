@@ -23,17 +23,22 @@ public class LevelManager : MonoBehaviour
     private List<GameObject> activeRooms = new List<GameObject>();
     
     private Dictionary<int, RoomManager> clusterLastRooms = new Dictionary<int, RoomManager>();
+    private Dictionary<int, RoomManager> clusterFirstRooms = new Dictionary<int, RoomManager>();
 
     private void OnEnable()
     {
         GameEvents.OnRequestLevelGeneration += LevelGeneration;
         GameEvents.OnPlayerDied += HandleDespawnEnemies;
+        GameEvents.OnCombatClusterTriggered += HandleCombatCameraEnter;
+        GameEvents.OnRoomRewardCollected += HandleCombatCameraExit;
     }
 
     private void OnDisable()
     {
         GameEvents.OnRequestLevelGeneration -= LevelGeneration;
         GameEvents.OnPlayerDied -= HandleDespawnEnemies;
+        GameEvents.OnCombatClusterTriggered -= HandleCombatCameraEnter;
+        GameEvents.OnRoomRewardCollected -= HandleCombatCameraExit;
     }
     
     private async void LevelGeneration()
@@ -58,6 +63,7 @@ public class LevelManager : MonoBehaviour
     {
         Transform lastExit = startingPoint;
         clusterLastRooms.Clear();
+        clusterFirstRooms.Clear();
         
         for (int i = 0; i < roomPrefabs.Count; i++)
         {
@@ -101,6 +107,8 @@ public class LevelManager : MonoBehaviour
                 bool isLast = !nextIsCombat;
 
                 currentRM.InitCombatRoom(currentClusterID, isFirst, isLast, this);
+                
+                if (isFirst) clusterFirstRooms[currentClusterID] = currentRM;
 
                 if (isLast)
                 {
@@ -216,5 +224,20 @@ public class LevelManager : MonoBehaviour
             }
         }
         activeEnemies.Clear();
+    }
+    
+    private void HandleCombatCameraEnter(int clusterID)
+    {
+        if (clusterFirstRooms.TryGetValue(clusterID, out RoomManager firstRoom) && clusterLastRooms.TryGetValue(clusterID, out RoomManager lastRoom))
+        {
+            Vector3 leftWall = firstRoom.GetEntrancePosition();
+            Vector3 rightWall = lastRoom.GetExitPosition();
+            GameEvents.OnEnterCombatCamera?.Invoke(leftWall, rightWall);
+        }
+    }
+
+    private void HandleCombatCameraExit(int clusterID)
+    {
+        GameEvents.OnExitCombatCamera?.Invoke();
     }
 }
