@@ -13,7 +13,7 @@ public class CombatClusterTrigger : MonoBehaviour
         gameObject.SetActive(targetClusterID != -1);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (_hasTriggered || _targetClusterID == -1) return;
         
