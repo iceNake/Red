@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class RoomReward : MonoBehaviour
 {
-    private int _roomID;
+    private int _clusterID;
 
-    public void Init(int roomID)
+    public void Init(int clusterID)
     {
-        _roomID = roomID;
+        _clusterID = clusterID;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -16,8 +16,9 @@ public class RoomReward : MonoBehaviour
 
         if (player != null)
         {
-            GameEvents.OnRoomRewardCollected?.Invoke(_roomID);
+            GameEvents.OnRoomRewardCollected?.Invoke(_clusterID);
             gameObject.SetActive(false);
+            // aqui hay que hacer que se active el canvas para lo de la eleccion del reward
         }
     }
 }

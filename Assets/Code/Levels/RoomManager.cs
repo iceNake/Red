@@ -4,91 +4,131 @@ using UnityEngine.EventSystems;
 
 public class RoomManager : MonoBehaviour
 {
-    [Header("Room ID")]
-    public int roomID;
+    [Header("Room Identity")]
+    public bool isCombatRoom = true;
+    public int clusterID = -1;
+    public bool isFirstInCluster;
+    public bool isLastInCluster;
 
     [Header("Enemy Local Spawn")]
     [SerializeField] private int _roomBudget;
     [SerializeField] private EnemyBundleSO _enemyBundle;
     public List<Transform> enemyLevelSpawnPoints = new List<Transform>();
-    
+
     [Header("Reward Settings")]
+    [SerializeField] private GameObject _wallPrefab;
     [SerializeField] private Transform _rewardSpawnPoint;
     [SerializeField] private GameObject _rewardPrefab;
 
-    private int _activeEnemiesCount;
     private EnemySpawningSystem _spawningSystem;
     private LevelManager _levelManager;
-    private bool _isRoomActive = false;
-    private bool _isCleared = false;
+    private RoomConnector _roomConnector;
 
-    public void Init(int id, LevelManager manager)
+    private GameObject _activeEntranceWall;
+    private GameObject _activeExitWall;
+
+    private int _totalClusterEnemiesAlive;
+    private bool _isClusterActive = false;
+    private bool _isClusterCleared = false;
+    
+    public Vector3 GetEntrancePosition() => _roomConnector != null && _roomConnector.Entrance != null ? _roomConnector.Entrance.position : transform.position;
+    public Vector3 GetExitPosition() => _roomConnector != null && _roomConnector.Exit != null ? _roomConnector.Exit.position : transform.position;
+
+    private void Awake()
     {
-        roomID = id;
+        _roomConnector = GetComponent<RoomConnector>();
+    }
+
+    public void InitCombatRoom(int cID, bool isFirts, bool isLast, LevelManager manager)
+    {
+        isCombatRoom = true;
+        clusterID = cID;
+        isFirstInCluster = isFirts;
+        isLastInCluster = isLast;
         _levelManager = manager;
+        
+        _isClusterActive = false;
+        _isClusterCleared = false;
+        _totalClusterEnemiesAlive = 0;
         
         if (_enemyBundle != null) _spawningSystem = new EnemySpawningSystem(_enemyBundle, _levelManager);
     }
 
     private void OnEnable()
     {
+        GameEvents.OnCombatClusterTriggered += HandleClusterTriggered;
         GameEvents.OnRoomRewardCollected += HandleRewardCollected;
         GameEvents.OnEnemyDied += HandleEnemyDied;
-        GameEvents.OnLevelGenerated += HandleLevelStart;
     }
 
     private void OnDisable()
     {
+        GameEvents.OnCombatClusterTriggered -= HandleClusterTriggered;
         GameEvents.OnRoomRewardCollected -= HandleRewardCollected;
         GameEvents.OnEnemyDied -= HandleEnemyDied;
-        GameEvents.OnLevelGenerated -= HandleLevelStart;
+
+        DestroyWalls();
     }
 
-    private void HandleLevelStart()
+    private void HandleClusterTriggered(int triggeredClusterID)
     {
-        if (roomID == 0) StartRoom();
-    }
+        if (!isCombatRoom || clusterID != triggeredClusterID || _isClusterActive || _isClusterCleared) return;
 
-    private void HandleRewardCollected(int completedRoomID)
-    {
-        if (roomID == completedRoomID + 1) StartRoom();
-    }
+        _isClusterActive = true;
+        int mySpawnedEnemies = 0;
 
-    private void StartRoom()
-    {
-        if (_isCleared || _isRoomActive) return;
-        _isRoomActive = true;
+        if (_roomBudget > 0 && enemyLevelSpawnPoints.Count > 0 && _enemyBundle != null && _spawningSystem != null)
+            mySpawnedEnemies = _spawningSystem.SpawnEnemies(_roomBudget, enemyLevelSpawnPoints);
 
-        if (_roomBudget <= 0 || enemyLevelSpawnPoints.Count == 0 || _enemyBundle == null || _spawningSystem == null)
+        if (_wallPrefab != null && _roomConnector != null)
         {
-            SpawnReward();
-            return;
+            if (isFirstInCluster && _roomConnector.Entrance != null)
+                _activeEntranceWall = Instantiate(_wallPrefab, _roomConnector.Entrance.transform.position, _roomConnector.Entrance.transform.rotation);
+            
+            if (isLastInCluster && _roomConnector.Exit != null)
+                _activeExitWall = Instantiate(_wallPrefab, _roomConnector.Exit.transform.position, _roomConnector.Exit.transform.rotation);
         }
-
-        _activeEnemiesCount = _spawningSystem.SpawnEnemies(_roomBudget, enemyLevelSpawnPoints);
         
-        if (_activeEnemiesCount <= 0) SpawnReward();
+        if  (mySpawnedEnemies > 0) _levelManager.RegisterEnemiesToCluster(clusterID, mySpawnedEnemies);
     }
 
+    public void AddEnemiesToClusterCount(int count)
+    {
+        _totalClusterEnemiesAlive += count;
+    }
+    
     private void HandleEnemyDied()
     {
-        if (!_isRoomActive || _isCleared) return;
+        if (!isCombatRoom || !isLastInCluster || !_isClusterActive || _isClusterCleared) return;
 
-        _activeEnemiesCount--;
+        _totalClusterEnemiesAlive--;
         
-        if (_activeEnemiesCount <= 0) SpawnReward();
+        if (_totalClusterEnemiesAlive <= 0) SpawnReward();
     }
-
+    
     private void SpawnReward()
     {
-        _isCleared = true;
-        _isRoomActive = false;
+        _isClusterCleared = true;
 
         if (_rewardSpawnPoint != null && _rewardSpawnPoint != null)
         {
             GameObject reward = Instantiate(_rewardPrefab, _rewardSpawnPoint.position, Quaternion.identity);
             
-            if (reward.TryGetComponent<RoomReward>(out RoomReward roomReward)) roomReward.Init(roomID);
+            if (reward.TryGetComponent<RoomReward>(out RoomReward roomReward)) roomReward.Init(clusterID);
         }
+    }
+    
+    private void HandleRewardCollected(int completedClusterID)
+    {
+        if (!isCombatRoom || clusterID != completedClusterID) return;
+        
+        _isClusterCleared = false;
+        DestroyWalls();
+    }
+
+    private void DestroyWalls()
+    {
+        if (_activeEntranceWall != null) Destroy(_activeEntranceWall);
+        if (_activeExitWall != null) Destroy(_activeExitWall);
     }
 }
