@@ -11,6 +11,10 @@ public class Entity : MonoBehaviour, IDamageable
     [SerializeField] private Coroutine _hitstunCoroutine;
     public bool IsInHitstun {get; private set;}
 
+    public bool IsPaused {get; private set;}
+    private Vector2 _savedVelocity;
+    protected Animator _animator;
+
     #region Stats
     [SerializeField] private float _currentHealth;
     [SerializeField] private float _maxHealth;
@@ -78,6 +82,56 @@ public class Entity : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();
         _rb.freezeRotation = true;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _animator =  GetComponentInChildren<Animator>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        GameEvents.OnGameStateChanged += HandleGameStateChanged;
+        _isAlive = true;
+        _currentHealth = _maxHealth;
+        SetPaused(false);
+    }
+
+    protected virtual void OnDisable()
+    {
+        GameEvents.OnGameStateChanged -= HandleGameStateChanged;
+    }
+    
+    private void HandleGameStateChanged(GameState newState)
+    {
+        if (newState == GameState.Paused)
+            SetPaused(true);
+        else if (newState == GameState.Playing)
+            SetPaused(false);
+    }
+    
+    protected virtual void SetPaused(bool paused)
+    {
+        if (IsPaused == paused) return;
+        
+        IsPaused = paused;
+
+        if (IsPaused)
+        {
+            if (_rb != null)
+            {
+                _savedVelocity = _rb.linearVelocity;
+                _rb.simulated = false;
+            }
+            
+            if (_animator != null) _animator.speed = 0f;
+        }
+        else
+        {
+            if (_rb != null)
+            {
+                _rb.simulated = true;
+                _rb.linearVelocity = _savedVelocity;
+            }
+            
+            if (_animator != null) _animator.speed = 1f;
+        }
     }
 
     public void Healing(float heal)
@@ -152,11 +206,20 @@ public class Entity : MonoBehaviour, IDamageable
         }
         
     }
+    
+    public virtual void Die()
+    {
+        if (!_isAlive) return;
+
+        _isAlive = false;
+        gameObject.SetActive(false);
+        Debug.Log("My story shouldn't end like this (Died)");
+    }
 
     IEnumerator HitstunCoroutine(float duration)
     {
         _isInHitstun = true;
-        yield return new WaitForSeconds(duration);
+        yield return WaitWhileNotPaused(duration);
 
         _isInHitstun = false;
         _hitstunCoroutine = null;
@@ -168,20 +231,23 @@ public class Entity : MonoBehaviour, IDamageable
 
     }
 
-    public virtual void Die()
-    {
-        if (!_isAlive) return;
-
-        _isAlive = false;
-        gameObject.SetActive(false);
-        Debug.Log("My story shouldn't end like this (Died)");
-    }
-
     public IEnumerator IFrames(float duration)
     {
         invulnerable = true;
-        yield return new WaitForSeconds(duration);
+        yield return WaitWhileNotPaused(duration);
         invulnerable = false;
+    }
+    
+    protected IEnumerator WaitWhileNotPaused(float duration)
+    {
+        float elapsed = 0f;
+        
+        while (elapsed < duration)
+        {
+            if (!IsPaused) elapsed += Time.deltaTime;
+            
+            yield return null;
+        }
     }
 
     #endregion

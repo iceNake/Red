@@ -76,10 +76,7 @@ public class Player : Entity
 
     [Header("Attack System")]
     public PlayerHitBoxModifier playerHitBoxModifier;
-
     
-
-    private Animator _animator;
 
     private void OnEnable()
     {
