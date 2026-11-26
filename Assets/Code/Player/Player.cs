@@ -41,6 +41,7 @@ public class Player : Entity
     private InputAction _red;
     private InputAction _dash;
     private InputAction _interact;
+    private InputAction _grandma;
 
     [Header("Movement Settings")]
     public float walkSpeed = 8f;
@@ -76,7 +77,7 @@ public class Player : Entity
 
     [Header("Attack System")]
     public PlayerHitBoxModifier playerHitBoxModifier;
-
+    public Grandma grandma;
     
 
     private Animator _animator;
@@ -117,6 +118,7 @@ public class Player : Entity
         _jump = map.FindAction(PlayerStrings.PlayerInputStrings.jump);
         _red = map.FindAction(PlayerStrings.PlayerInputStrings.red);
         _dash = map.FindAction(PlayerStrings.PlayerInputStrings.dash);
+        _grandma = map.FindAction(PlayerStrings.PlayerInputStrings.grandma);
         _interact = map.FindAction(PlayerStrings.PlayerInputStrings.interact);
     }
 
@@ -201,6 +203,10 @@ public class Player : Entity
         if (_interact.WasPressedThisFrame())
         {
             PerformInteraction();
+        }
+        if(_grandma.WasPressedThisFrame())
+        {
+
         }
     }
 
@@ -465,5 +471,6 @@ public static class PlayerStrings
         public const string jump = "Jump";
         public const string dash = "Dash";
         public const string interact = "Interact";
+        public const string grandma = "Grandma";
     }
 }
