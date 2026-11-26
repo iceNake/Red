@@ -23,8 +23,7 @@ public enum CharacterRestrictions
 
 public class Player : Entity
 {
-    [Header("Animator Hashes")]
-    private static readonly int HorizontalHash = Animator.StringToHash("Horizontal");
+    [Header("Animator Hashes")] private static readonly int HorizontalHash = Animator.StringToHash("Horizontal");
     private static readonly int VerticalHash = Animator.StringToHash("Vertical");
     private static readonly int IsGroundedHash = Animator.StringToHash("IsGrounded");
     private static readonly int JumpHash = Animator.StringToHash("Jump");
@@ -33,8 +32,7 @@ public class Player : Entity
     private static readonly int DeathHash = Animator.StringToHash("DEATH");
     private static readonly int TakeDamageHash = Animator.StringToHash("TakeDamage");
 
-    [Header("Input Settings")]
-    public InputActionAsset actions;
+    [Header("Input Settings")] public InputActionAsset actions;
 
     private InputAction _move;
     private InputAction _jump;
@@ -43,8 +41,7 @@ public class Player : Entity
     private InputAction _interact;
     private InputAction _grandma;
 
-    [Header("Movement Settings")]
-    public float walkSpeed = 8f;
+    [Header("Movement Settings")] public float walkSpeed = 8f;
     public float jumpSpeed = 12f;
     public float dashForce = 20f;
     public float dashDuration = 1f;
@@ -65,8 +62,9 @@ public class Player : Entity
 
     [SerializeField] private bool isGrounded;
 
-    [Header("Detection Settings")]
-    [SerializeField] private Transform raycastOrigin;
+    [Header("Detection Settings")] [SerializeField]
+    private Transform raycastOrigin;
+
     [SerializeField] private float raycastLength = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
@@ -75,10 +73,9 @@ public class Player : Entity
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    [Header("Attack System")]
-    public PlayerHitBoxModifier playerHitBoxModifier;
+    [Header("Attack System")] public PlayerHitBoxModifier playerHitBoxModifier;
     public Grandma grandma;
-    
+
 
     private Animator _animator;
 
@@ -163,6 +160,7 @@ public class Player : Entity
 
         Debug.Log("<color=blue> Hey! You knocked the air out of me (Got knockback) </color>");
     }
+
     private void CheckGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(
@@ -204,7 +202,8 @@ public class Player : Entity
         {
             PerformInteraction();
         }
-        if(_grandma.WasPressedThisFrame())
+
+        if (_grandma.WasPressedThisFrame())
         {
 
         }
@@ -238,7 +237,7 @@ public class Player : Entity
         if (remainingJumps > 0)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
-            
+
             _rb.AddForce(
                 Vector2.up * jumpSpeed,
                 ForceMode2D.Impulse
@@ -263,6 +262,7 @@ public class Player : Entity
 
             Invoke(nameof(EndDash), 0.2f);
         }
+
         //Coroutine in Entity
         StartCoroutine(IFrames(dashDuration));
 
@@ -270,7 +270,7 @@ public class Player : Entity
         _animator.SetTrigger(DodgeHash);
     }
 
-    
+
 
     private void EndDash()
     {
@@ -279,14 +279,30 @@ public class Player : Entity
 
     private void UpdateAnimatorParameters()
     {
+        float animHorizontal = Mathf.Abs(_moveInput.x);
+        float animVertical = 0f;
+
+        if (_moveInput.y > 0.5f)
+        {
+            animVertical = 1f;
+            
+            if (_moveInput.y > animHorizontal) animHorizontal = 0f;
+        }
+        else if (_moveInput.y < -0.5f)
+        {
+            animVertical = -1f;
+            
+            if (Mathf.Abs(_moveInput.y) >= animHorizontal) animHorizontal = 0f;
+        }
+
         _animator.SetFloat(
             HorizontalHash,
-            Mathf.Abs(_moveInput.x)
+            animHorizontal
         );
 
         _animator.SetFloat(
             VerticalHash,
-            _moveInput.y
+            animVertical
         );
 
         _animator.SetBool(
@@ -299,14 +315,14 @@ public class Player : Entity
     {
         if (_canTurn)
         {
-            if (_moveInput.x > 0)
+            if (_moveInput.x > 0.15f)
             {
                 Debug.Log("derecha");
 
                 spriteRenderer.flipX = false;
                 isPlayerFlipped = false;
             }
-            else if (_moveInput.x < 0)
+            else if (_moveInput.x < -0.15f)
             {
                 Debug.Log("izquierda");
 
