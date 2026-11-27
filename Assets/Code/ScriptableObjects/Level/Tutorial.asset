@@ -28,8 +28,8 @@ MonoBehaviour:
   eventRoomsPool:
   - {fileID: 257498154865536231, guid: 49600b39e5f3be54fab627b4fb5846b7, type: 3}
   defaultRoomsPool:
-  - {fileID: 257498154865536231, guid: a840d92b8ad0cd5478329f66a4ffedb5, type: 3}
-  - {fileID: 257498154865536231, guid: 40edebb3100a246459400ebb8d29f69d, type: 3}
+  - {fileID: 2928345937839223352, guid: a840d92b8ad0cd5478329f66a4ffedb5, type: 3}
+  - {fileID: 6004774020696985425, guid: 40edebb3100a246459400ebb8d29f69d, type: 3}
   - {fileID: 257498154865536231, guid: 662492c4a2414ab4d8b6753a2174b2fd, type: 3}
   - {fileID: 257498154865536231, guid: eaef672b3f907ee46bc92db927248809, type: 3}
   - {fileID: 257498154865536231, guid: 2a26466e7b98d3d45acb030d424f5aab, type: 3}
